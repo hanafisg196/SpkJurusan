@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SoalController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\UjianController;
 use App\Http\Controllers\SubSoalController;
 use App\Http\Controllers\PihakSekolahController;
 
@@ -37,4 +38,4 @@ Route::resource('/soal',SoalController::class);
 Route::post('/editsoal/{id}', [SoalController::class,'editsoal']);
 Route::resource('/subsoal',SubSoalController::class);
 Route::post('/tambahjawaban/{id}', [SubSoalController::class,'tambahjawaban']);
-
+Route::resource('/ujian',UjianController::class);
