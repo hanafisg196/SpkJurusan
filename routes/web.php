@@ -1,6 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SoalController;
+use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\UjianController;
+use App\Http\Controllers\SubSoalController;
+use App\Http\Controllers\PihakSekolahController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +21,21 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/main', function () {
+    return view('tampilan.main');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard.index');
+});
+
+Route::resource('/siswa',SiswaController::class);
+Route::post('/editsiswa/{id}', [SiswaController::class,'editsiswa']);
+Route::resource('/pihaksekolah',PihakSekolahController::class);
+Route::post('/editpihaksekolah/{id}', [PihakSekolahController::class,'editpihaksekolah']);
+Route::resource('/soal',SoalController::class);
+Route::post('/editsoal/{id}', [SoalController::class,'editsoal']);
+Route::resource('/subsoal',SubSoalController::class);
+Route::post('/tambahjawaban/{id}', [SubSoalController::class,'tambahjawaban']);
+Route::resource('/ujian',UjianController::class);
