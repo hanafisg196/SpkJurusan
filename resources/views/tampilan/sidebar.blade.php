@@ -63,16 +63,6 @@
         </ul>
 
         <ul class="pcoded-item pcoded-left-item">
-            <li class="{{ request()->segment(1)=='ujian'? 'active' : '' }}">
-                <a href="/ujian">
-                    <span class="pcoded-micon"><i class="ti-ruler-pencil"></i></span>
-                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Ujian</span>
-                    <span class="pcoded-mcaret"></span>
-                </a>
-            </li>
-        </ul>
-
-        <ul class="pcoded-item pcoded-left-item">
             <li class="{{ request()->segment(1)=='hasilujian'? 'active' : '' }}">
                 <a href="/hasilujian">
                     <span class="pcoded-micon"><i class="ti-list-ol"></i></i></span>
