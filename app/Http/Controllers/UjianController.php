@@ -19,7 +19,7 @@ class UjianController extends Controller
      */
     public function create()
     {
-        //
+        return view('ujian.mulai');
     }
 
     /**
