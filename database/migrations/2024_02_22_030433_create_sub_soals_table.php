@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('jawaban');
             $table->string('nilai');
+            $table->foreignId('soal_id');
             $table->timestamps();
 
-            $table->foreignId('soal_id');
         });
     }
 
