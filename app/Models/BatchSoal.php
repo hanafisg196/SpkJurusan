@@ -5,20 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Soal extends Model
+class BatchSoal extends Model
 {
     use HasFactory;
-
     protected $primaryKey = 'id';
     protected $guarded = ['id'];
 
-    public function subsoal()
-    {
-        return $this->hasMany(SubSoal::class);
-    }
 
-    public function batch()
+    public function soal()
     {
-        return $this->belongsTo(BatchSoal::class, 'batch_id','id');
+        return $this->hasMany(Soal::class, 'batch_id','id');
     }
 }

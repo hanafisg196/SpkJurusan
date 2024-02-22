@@ -34,6 +34,15 @@
             </li>
         </ul>
         <ul class="pcoded-item pcoded-left-item">
+            <li class="{{ request()->segment(1)=='batch'? 'active' : '' }}">
+                <a href="/batch">
+                    <span class="pcoded-micon"><i class="ti-bookmark-alt"></i></span>
+                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Batch Soal</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+        </ul>
+        <ul class="pcoded-item pcoded-left-item">
             <li class="{{ request()->segment(1)=='soal'? 'active' : '' }}">
                 <a href="/soal">
                     <span class="pcoded-micon"><i class="ti-bookmark-alt"></i></span>

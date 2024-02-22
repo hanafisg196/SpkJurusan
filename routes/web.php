@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BatchSoalController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SoalController;
 use App\Http\Controllers\SiswaController;
@@ -39,3 +40,5 @@ Route::post('/editsoal/{id}', [SoalController::class,'editsoal']);
 Route::resource('/subsoal',SubSoalController::class);
 Route::post('/tambahjawaban/{id}', [SubSoalController::class,'tambahjawaban']);
 Route::resource('/ujian',UjianController::class);
+Route::resource('/batch',BatchSoalController::class);
+Route::post('/batch/{id}', [BatchSoalController::class,'edit']);
