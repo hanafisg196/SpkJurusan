@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BatchSoal;
 use App\Models\Soal;
 use Illuminate\Http\Request;
 
@@ -12,8 +13,13 @@ class SoalController extends Controller
      */
     public function index()
     {
-        return view('soal.index',[
-            "data" => Soal::latest()->get()
+
+        $batch = BatchSoal::all();
+        $data = Soal::latest()->get();
+
+        return view('soal.index')->with([
+            'data'=> $data,
+            'batch'=> $batch
         ]);
     }
 
@@ -26,8 +32,11 @@ class SoalController extends Controller
         $validatedData = $request -> validate([
             "kode" => "required",
             "soal" => "required",
-            "jenis" => "required"
+            "jenis" => "required",
+            "batch_id" => "required"
         ]);
+        $validatedData['batch_id'] = $request->input('batch_id');
+
         Soal::create($validatedData);
         return redirect("/soal")->with("success","Data Berhasil Ditambahkan!");
     }

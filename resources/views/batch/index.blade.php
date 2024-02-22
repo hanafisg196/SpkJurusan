@@ -4,7 +4,7 @@
 <!-- Contextual classes table starts -->
     <div class="card">
         <div class="card-header">
-            <h5>Tabel Data Siswa</h5>
+            <h5>Tabel Batch Soal</h5>
             <div class="card-header-right">
                 <ul class="list-unstyled card-option">
                     <li><i class="fa fa-chevron-left"></i></li>
@@ -37,9 +37,8 @@
                     <thead>
                         <tr>
                             <th>No</th>
+                            <th>Titile</th>
                             <th>Kode</th>
-                            <th>Soal</th>
-                            <th>Jenis</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -55,17 +54,18 @@
                         @foreach ($data as $datas)
                         <tr>
                             <th scope="row">{{ $no++}}</th>
+                            <td>{{ $datas['title'] }}</td>
                             <td>{{ $datas['kode'] }}</td>
-                            <td>{{ $datas['soal'] }}</td>
-                            <td>{{ $datas['jenis'] }}</td>
                             <td>
-                                <button type="button" class="btn btn-primary exampleModaledit" data-toggle="modal" data-target="#exampleModaledit{{ $datas->id }}">
+                                <button type="button" class="btn btn-primary exampleModaledit" 
+                                data-toggle="modal" data-target="#exampleModaledit{{ $datas->id }}">
                                     <i class="ti-pencil"></i>
                                 </button>
-                                <form action="/soal/{{ $datas->id }}" method="POST" class="d-inline">
+                                <form action="/batch/{{ $datas->id }}" method="POST" class="d-inline">
                                     @method('delete')
                                     @csrf
-                                    <button class="ti-trash btn btn-danger" onclick="return confirm('Yakin Menghapus Data?')"></button>
+                                    <button class="ti-trash btn btn-danger"
+                                    onclick="return confirm('Yakin Menghapus Data?')"></button>
                                 </form>
                             </td>
                         </tr>
@@ -90,28 +90,32 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="/soal" enctype="multipart/form-data">
+                <form method="POST" action="/batch" enctype="multipart/form-data">
                     @csrf
                     <div class="card-block">
 
-                        
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Batch</label>
-                            <div class="col-md-3">
-                                <select class="form-control" name="batch_id" >
-                                    @foreach ($batch as $items )
-                                    <option value="{{ $items->id }}">{{ $items->kode }}</option>
-                                @endforeach
-                                </select>
+                            <label class="col-sm-3 col-form-label">Title</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="title" name="title" 
+                                class="form-control @error('title') is-invalid @enderror"
+                                value="{{ old('title') }}" required>
+
+                                @error('title')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Kode</label>
                             <div class="col-sm-9">
-                                <input type="text" id="kode" name="kode" class="form-control @error('kode') is-invalid @enderror"
+                                <input type="text" id="kode" name="kode"
+                                class="form-control @error('kode') is-invalid @enderror"
                                 value="{{ old('kode') }}" required>
-
                                 @error('kode')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -120,37 +124,6 @@
 
                             </div>
                         </div>
-
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Soal</label>
-                            <div class="col-sm-9">
-                                <textarea name="soal" id="soal" cols="30" rows="5"
-                                class="form-control" required placeholder="Tulis soal..."></textarea>
-
-                                @error('soal')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Jenis</label>
-                            <div class="col-sm-9">
-                                <input type="text" id="jenis" name="jenis" class="form-control @error('jenis') is-invalid @enderror"
-                                value="{{ old('jenis') }}" required>
-
-                                @error('jenis')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-
-                            </div>
-                        </div>
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -166,7 +139,7 @@
 
 {{-- Modal Edit Data --}}
 @foreach ($data as $datas)
-    <div class="modal fade" id="exampleModaledit{{ $datas->id }}" 
+    <div class="modal fade" id="exampleModaledit{{ $datas->id }}"
         tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -177,46 +150,31 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="{{ url('/editsoal', $datas->id) }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ url('/batch', $datas->id) }}" enctype="multipart/form-data">
                         @csrf
                         <div class="card-block">
+                            <div class="form-group row">
+                                <label for="title" class="col-sm-3 col-form-label">Title</label>
+                                <div class="col-sm-9">
+                                    <input type="text" id="title" name="title" 
+                                    class="form-control @error('title') is-invalid @enderror"
+                                    value="{{ $datas->title }}" required>
+                                    @error('title')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
 
 
                             <div class="form-group row">
                                 <label for="kode" class="col-sm-3 col-form-label">Kode</label>
                                 <div class="col-sm-9">
-                                    <input type="text" id="kode" name="kode" class="form-control
-                                     @error('kode') is-invalid @enderror" value="{{ $datas->kode }}" required>
+                                    <input type="text" id="kode" name="kode"
+                                     class="form-control @error('kode') is-invalid @enderror"
+                                     value="{{ $datas->kode }}" required>
                                     @error('kode')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Soal</label>
-                                <div class="col-sm-9">
-                                    <textarea name="soal" id="soal" cols="30" rows="5"
-                                    class="form-control" required placeholder="Tulis soal...">
-                                    {{ $datas->soal }}</textarea>
-
-                                    @error('soal')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="jenis" class="col-sm-3 col-form-label">Jenis</label>
-                                <div class="col-sm-9">
-                                    <input type="text" id="jenis" name="jenis" class="form-control
-                                     @error('jenis') is-invalid @enderror" value="{{ $datas->jenis }}" required>
-                                    @error('jenis')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>

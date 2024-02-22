@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('soals', function (Blueprint $table) {
+        Schema::create('batch_soals', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
             $table->string('kode');
-            $table->string('soal');
-            $table->string('jenis');
-            $table->unsignedBigInteger('batch_id')->nullable(false);
+            $table->tinyInteger('enabled')->default(0);
             $table->timestamps();
-
-            $table->foreign("batch_id")->on("batch_soals")->references("id");
         });
     }
 
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('soals');
+        Schema::dropIfExists('batch_soals');
     }
 };
