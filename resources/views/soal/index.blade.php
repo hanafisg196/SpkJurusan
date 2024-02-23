@@ -38,6 +38,7 @@
                         <tr>
                             <th>No</th>
                             <th>Kode</th>
+                            <th>Batch</th>
                             <th>Soal</th>
                             <th>Jenis</th>
                             <th>Aksi</th>
@@ -55,17 +56,20 @@
                         @foreach ($data as $datas)
                         <tr>
                             <th scope="row">{{ $no++}}</th>
-                            <td>{{ $datas['kode'] }}</td>
-                            <td>{{ $datas['soal'] }}</td>
-                            <td>{{ $datas['jenis'] }}</td>
+                            <td>{{ $datas->kode }}</td>
+                            <td>{{ $datas->batch->kode }}</td>
+                            <td>{{ $datas->soal }}</td>
+                            <td>{{ $datas->jenis }}</td>
                             <td>
-                                <button type="button" class="btn btn-primary exampleModaledit" data-toggle="modal" data-target="#exampleModaledit{{ $datas->id }}">
+                                <button type="button" class="btn btn-primary exampleModaledit"
+                                 data-toggle="modal" data-target="#exampleModaledit{{ $datas->id }}">
                                     <i class="ti-pencil"></i>
                                 </button>
                                 <form action="/soal/{{ $datas->id }}" method="POST" class="d-inline">
                                     @method('delete')
                                     @csrf
-                                    <button class="ti-trash btn btn-danger" onclick="return confirm('Yakin Menghapus Data?')"></button>
+                                    <button class="ti-trash btn btn-danger" 
+                                    onclick="return confirm('Yakin Menghapus Data?')"></button>
                                 </form>
                             </td>
                         </tr>
