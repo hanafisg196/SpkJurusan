@@ -63,6 +63,28 @@
         <div class="container">
             <div class="row g-3">
                 <div class="card" style="border: 0ch">
+                    <div class="card-body">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <a href="#" class="btn btn-primary">1</a>
+                                    <a href="#" class="btn btn-secondary">2</a>
+                                    <a href="#" class="btn btn-secondary">3</a>
+                                    <a href="#" class="btn btn-secondary">4</a>
+                                    <a href="#" class="btn btn-secondary">5</a>
+                                    <a href="#" class="btn btn-secondary">6</a>
+                                    <a href="#" class="btn btn-secondary">7</a>
+                                    <a href="#" class="btn btn-secondary">8</a>
+                                    <a href="#" class="btn btn-secondary">9</a>
+                                    <a href="#" class="btn btn-secondary">10</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-3">
+                <div class="card" style="border: 0ch">
                     <div class="card-header">
                     </div>
                     <div class="card-header" style="background-color:rgb(210, 210, 210)">
@@ -114,27 +136,6 @@
         </div>
     </div>
     <!-- Ujian End -->
-
-
-    <!-- Footer Start -->
-    <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
-        <div class="container py-5">
-
-        </div>
-        <div class="container">
-            <div class="copyright">
-                <div class="row">
-                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        &copy; Copyright 2024.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Footer end -->
-
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 
 
     <!-- JavaScript /assets1/Libraries -->
