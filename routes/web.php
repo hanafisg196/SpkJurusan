@@ -26,10 +26,21 @@ Route::get('/', function () {
 Route::get('/main', function () {
     return view('tampilan.main');
 });
+Route::get('/main2', function () {
+    return view('tampilan2.main');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard.index');
 });
+Route::get('/login', function () {
+    return view('login.index');
+});
+
+
+Route::resource('/ujian',UjianController::class);
+
+
 
 Route::resource('/siswa',SiswaController::class);
 Route::post('/editsiswa/{id}', [SiswaController::class,'editsiswa']);
@@ -39,6 +50,5 @@ Route::resource('/soal',SoalController::class);
 Route::post('/editsoal/{id}', [SoalController::class,'editsoal']);
 Route::resource('/subsoal',SubSoalController::class);
 Route::post('/tambahjawaban/{id}', [SubSoalController::class,'tambahjawaban']);
-Route::resource('/ujian',UjianController::class);
 Route::resource('/batch',BatchSoalController::class);
 Route::post('/batch/{id}', [BatchSoalController::class,'edit']);
