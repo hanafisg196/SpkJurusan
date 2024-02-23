@@ -5,6 +5,7 @@
 
 
         <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Menu</div>
+        @if (auth()->user()->role == 'admin')
         <ul class="pcoded-item pcoded-left-item">
             <li class="{{ request()->segment(1)=='dashboard'? 'active' : '' }}">
                 <a href="/dashboard">
@@ -14,6 +15,7 @@
                 </a>
             </li>
         </ul>
+
         <ul class="pcoded-item pcoded-left-item">
             <li class="{{ request()->segment(1)=='siswa'? 'active' : '' }}">
                 <a href="/siswa">
@@ -33,6 +35,7 @@
                 </a>
             </li>
         </ul>
+
         <ul class="pcoded-item pcoded-left-item">
             <li class="{{ request()->segment(1)=='batch'? 'active' : '' }}">
                 <a href="/batch">
@@ -42,6 +45,7 @@
                 </a>
             </li>
         </ul>
+
         <ul class="pcoded-item pcoded-left-item">
             <li class="{{ request()->segment(1)=='soal'? 'active' : '' }}">
                 <a href="/soal">
@@ -62,7 +66,20 @@
             </li>
         </ul>
 
+        @elseif  (auth()->user()->role == 'guru')
+        
         <ul class="pcoded-item pcoded-left-item">
+
+            <ul class="pcoded-item pcoded-left-item">
+                <li class="{{ request()->segment(1)=='dashboard'? 'active' : '' }}">
+                    <a href="/dashboard">
+                        <span class="pcoded-micon"><i class="ti-home"></i></span>
+                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
+                        <span class="pcoded-mcaret"></span>
+                    </a>
+                </li>
+            </ul>
+            
             <li class="{{ request()->segment(1)=='hasilujian'? 'active' : '' }}">
                 <a href="/hasilujian">
                     <span class="pcoded-micon"><i class="ti-list-ol"></i></i></span>
@@ -71,6 +88,10 @@
                 </a>
             </li>
         </ul>
+
+        @endif
+
+    
 
     </div>
 
