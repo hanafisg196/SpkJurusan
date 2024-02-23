@@ -22,6 +22,8 @@ class UjianController extends Controller
         return view('ujian.mulai');
     }
 
+  
+
     /**
      * Store a newly created resource in storage.
      */

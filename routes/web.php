@@ -24,18 +24,6 @@ use App\Http\Controllers\PihakSekolahController;
 
 
 
-
-
-Route::get('/main', function () {
-    return view('tampilan.main');
-});
-Route::get('/main2', function () {
-    return view('tampilan2.main');
-});
-
-
-
-
 Route::middleware('guest')->group(function () {
     Route::get('/', [HomeController::class, 'index']);
     Route::get('/login', [LoginController::class, 'index'])->name('login');
@@ -74,6 +62,8 @@ Route::group(['middleware' => ['auth', 'checkrole:guru']], function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'home'])->name('home');
+    Route::get('/ujian', [HomeController::class, 'list']);
+   
 });
 
 

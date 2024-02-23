@@ -64,7 +64,7 @@
                                 <hr/>
                                 <div class="input-group">
                                     <input type="text" class="form-control  @error('username') is-invalid @enderror"
-                                     name="username" placeholder="Masukkan Username">
+                                     name="username" placeholder="Username">
                                      @error('username')
                                      <div class="invalid-feedback">
                                          {{ $message }}
