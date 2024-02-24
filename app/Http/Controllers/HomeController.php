@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BatchSoal;
+use App\Models\Soal;
 use Illuminate\Bus\Batch;
 use Illuminate\Http\Request;
 
@@ -23,5 +24,15 @@ class HomeController extends Controller
    {
       $batch = BatchSoal::all();
        return view('ujian.list')->with('batch', $batch);
+   }
+
+   public function mulai()
+   {
+
+      $soal = Soal::with('subsoal')->paginate(1);
+
+      // return json_encode($soal);
+
+      return view('ujian.mulai')->with('soal', $soal);
    }
 }

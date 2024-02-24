@@ -63,6 +63,7 @@ Route::group(['middleware' => ['auth', 'checkrole:guru']], function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'home'])->name('home');
     Route::get('/ujian', [HomeController::class, 'list']);
+    Route::get('/kerjakan', [HomeController::class, 'mulai']);
    
 });
 
