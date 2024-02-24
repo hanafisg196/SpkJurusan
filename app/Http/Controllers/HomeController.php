@@ -26,13 +26,12 @@ class HomeController extends Controller
        return view('ujian.list')->with('batch', $batch);
    }
 
-   public function mulai()
+   public function mulai($id)
    {
+        $batchsoal = BatchSoal::find($id);
 
-      $soal = Soal::with('subsoal')->paginate(1);
+        // return json_encode($soal);
 
-      // return json_encode($soal);
-
-      return view('ujian.mulai')->with('soal', $soal);
+        return view('ujian.mulai')->with('batchsoal', $batchsoal);
    }
 }

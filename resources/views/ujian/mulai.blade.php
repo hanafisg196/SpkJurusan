@@ -30,6 +30,7 @@
 
     <!-- Template Stylesheet -->
     <link href="/assets1/css/style.css" rel="stylesheet">
+    @livewireStyles
 </head>
 
 <body>
@@ -42,78 +43,7 @@
     <!-- Spinner End -->
 
 
-    <!-- Navbar Start -->
-    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
-        <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
-            <h5 class="ml-3">{{ auth()->user()->name }}/ {{ auth()->user()->username }}</h5>
-        </a>
-        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav p-4 p-lg-0" style="margin-left: 30%">
-                <h5>00:29:30</h5>
-            </div>
-        </div>
-    </nav>
-    <!-- Navbar End -->
-
-    <!-- Ujian Start -->
-    
-    <div class="container-xxl py-5 category">
-        <div class="container">
-            <div class="row g-3">
-                @foreach ($soal as $question)
-                <div class="card" style="border: 0ch">
-                    <div class="card-body">
-                        <div class="col-lg-12">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    {{$soal->links()}}
-                                   
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row g-3">
-                <div class="card" style="border: 0ch">
-                    <div class="card-header">
-                    </div>
-                    <div class="card-header" style="background-color:rgb(210, 210, 210)">
-                        Soal No {{ $question->id }}
-                    </div>
-                    <div class="card-body">
-                        <div class="col-lg-11 mx-auto">
-                            <div class="row">
-                                <div class="col-lg-8">
-                                    <p class="card-text">{{ $question->soal }}</p>
-                                <div class="col-lg-4">
-                                    @foreach ($question->subsoal as $sub)
-                                    <label for="option{{ $sub->id }}">
-                                        <input type="radio" id="option{{ $sub->id }}"
-                                        name="jawaban"
-                                        value="{{ $sub->nilai }}">
-                                        {{ $sub->jawaban }}
-                                    </label><br>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer text-center" style="background-color:rgb(210, 210, 210)">
-                        <a href="#" class="btn btn-primary">kembali</a>
-                        <a href="#" class="btn btn-primary">Lanjutkan</a>
-                    </div>
-                    <div class="card-footer text-center">
-                    </div>
-                </div>
-                @endforeach
-            </div>
-        </div>
-    </div>
-    <!-- Ujian End -->
+    @livewire('kerjakanujian')
 
 
     <!-- JavaScript /assets1/Libraries -->
@@ -126,6 +56,7 @@
 
     <!-- Template Javascript -->
     <script src="/assets1/js/main.js"></script>
+    @livewireScripts
 </body>
 
 </html>

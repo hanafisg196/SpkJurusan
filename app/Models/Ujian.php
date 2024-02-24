@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Ujian extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'id';
+    protected $guarded = ['id'];
 }

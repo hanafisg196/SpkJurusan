@@ -25,9 +25,9 @@
         @endif
 
         <div class="text-right mr-4">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                 <i class="ti-plus"></i>Tambah
-            </button>
+            </button> --}}
             {{-- <a href="/kegiatan/create" class="btn waves-effect waves-light btn-primary"><i class="ti-plus"></i>Tambah</a> --}}
         </div>
         <div class="card-block table-border-style">
@@ -57,16 +57,16 @@
                             <td>{{ $datas['title'] }}</td>
                             <td>{{ $datas['kode'] }}</td>
                             <td>
-                                <button type="button" class="btn btn-primary exampleModaledit" 
+                                <button type="button" class="btn btn-primary exampleModaledit"
                                 data-toggle="modal" data-target="#exampleModaledit{{ $datas->id }}">
                                     <i class="ti-pencil"></i>
                                 </button>
-                                <form action="/batch/{{ $datas->id }}" method="POST" class="d-inline">
+                                {{-- <form action="/batch/{{ $datas->id }}" method="POST" class="d-inline">
                                     @method('delete')
                                     @csrf
                                     <button class="ti-trash btn btn-danger"
                                     onclick="return confirm('Yakin Menghapus Data?')"></button>
-                                </form>
+                                </form> --}}
                             </td>
                         </tr>
                         @endforeach
@@ -97,7 +97,7 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Title</label>
                             <div class="col-sm-9">
-                                <input type="text" id="title" name="title" 
+                                <input type="text" id="title" name="title"
                                 class="form-control @error('title') is-invalid @enderror"
                                 value="{{ old('title') }}" required>
 
@@ -156,7 +156,7 @@
                             <div class="form-group row">
                                 <label for="title" class="col-sm-3 col-form-label">Title</label>
                                 <div class="col-sm-9">
-                                    <input type="text" id="title" name="title" 
+                                    <input type="text" id="title" name="title"
                                     class="form-control @error('title') is-invalid @enderror"
                                     value="{{ $datas->title }}" required>
                                     @error('title')

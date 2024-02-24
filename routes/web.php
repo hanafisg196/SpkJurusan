@@ -28,7 +28,7 @@ Route::middleware('guest')->group(function () {
     Route::get('/', [HomeController::class, 'index']);
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('/login', [LoginController::class, 'doLogin']);
-  
+
 });
 
 
@@ -57,14 +57,19 @@ Route::group(['middleware' => ['auth', 'checkrole:guru']], function () {
     });
     Route::post('/logout', [LoginController::class, 'doLogout']);
     Route::resource('/ujian',UjianController::class);
-    
+
+
 });
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'home'])->name('home');
     Route::get('/ujian', [HomeController::class, 'list']);
-    Route::get('/kerjakan', [HomeController::class, 'mulai']);
-   
+    Route::get('/kerjakan/{id}/edit', [HomeController::class, 'mulai'])->name('kerjakan.edit');
+
+    Route::get('/kerjakan/{id}/edit?page={page}', [HomeController::class, 'mulai'])
+        ->name('kerjakan.edit.page')
+        ->middleware('bindings');
+
 });
 
 
