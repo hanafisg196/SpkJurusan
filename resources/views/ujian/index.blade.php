@@ -22,7 +22,7 @@
                                     Sukses mengikuti ujian penentuan jurusan SMK! Gunakan dengan bijak setiap pertanyaan sebagai langkah menuju masa depan sukses dan memuaskan.
                                     Kami yakin Anda akan menemukan jurusan yang menciptakan landasan kokoh untuk kesuksesan karir Anda di SMK. Selamat menemukan potensi terbaik Anda!</p>
                                 </p>
-                                    <a href="/ujian/create" class="btn btn-primary mb-3 ">Mulai Ujain</a>
+                                    <a href="/ujian" class="btn btn-primary mb-3 ">Mulai Ujain</a>
                     </div>
                 </div>
         </div>

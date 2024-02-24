@@ -24,18 +24,6 @@ use App\Http\Controllers\PihakSekolahController;
 
 
 
-
-
-Route::get('/main', function () {
-    return view('tampilan.main');
-});
-Route::get('/main2', function () {
-    return view('tampilan2.main');
-});
-
-
-
-
 Route::middleware('guest')->group(function () {
     Route::get('/', [HomeController::class, 'index']);
     Route::get('/login', [LoginController::class, 'index'])->name('login');
@@ -47,7 +35,7 @@ Route::middleware('guest')->group(function () {
 Route::group(['middleware' => ['auth', 'checkrole:admin']], function () {
     Route::get('/dashboard', function () {
         return view('dashboard.index');
-    })->name('dashboard');
+    });
     Route::post('/logout', [LoginController::class, 'doLogout']);
     Route::resource('/siswa',SiswaController::class);
     Route::post('/editsiswa/{id}', [SiswaController::class,'editsiswa']);
@@ -64,20 +52,19 @@ Route::group(['middleware' => ['auth', 'checkrole:admin']], function () {
 
 
 Route::group(['middleware' => ['auth', 'checkrole:guru']], function () {
-
     Route::get('/dashboard', function () {
         return view('dashboard.index');
-    })->name('dashboard');
+    });
     Route::post('/logout', [LoginController::class, 'doLogout']);
     Route::resource('/ujian',UjianController::class);
     
 });
 
-
-Route::group(['middleware' => ['auth']], function () {
-
-    Route::get('/', [HomeController::class, 'index']);
+Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'home'])->name('home');
+    Route::get('/ujian', [HomeController::class, 'list']);
+    Route::get('/kerjakan', [HomeController::class, 'mulai']);
+   
 });
 
 

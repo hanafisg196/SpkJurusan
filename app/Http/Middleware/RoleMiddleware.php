@@ -6,23 +6,25 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class Middleware
+class RoleMiddleware
 {
     /**
      * Handle an incoming request.
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next,...$role): Response
+    public function handle(Request $request, Closure $next): Response
     {
-        if(in_array($request->user()->role, $role))
-        {
+        
+
+    if (auth()->check()) {
+        $userRole = auth()->user()->role;
+        if ($userRole == 'admin' || $userRole == 'guru') {
             return $next($request);
         }
-
-        else{
-            return  abort(404);
-        }
+    }
+    return abort(404);
+        
       
     }
 }
