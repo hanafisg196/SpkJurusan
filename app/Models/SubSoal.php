@@ -15,4 +15,11 @@ class SubSoal extends Model
     {
         return $this->belongsTo(Soal::class);
     }
+
+    public function ujian()
+    {
+        return $this->hasMany(Ujian::class, 'subsoal_id','id');
+    }
+
+
 }

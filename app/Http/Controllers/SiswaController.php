@@ -61,7 +61,7 @@ class SiswaController extends Controller
 
         User::create($validatedData);
 
-        $request->session()->flash('success','tambah data berhasil');
+        $request->session()->flush('success','tambah data berhasil');
 
         return redirect('/siswa');
     }

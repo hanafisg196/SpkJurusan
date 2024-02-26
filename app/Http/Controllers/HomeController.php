@@ -22,17 +22,17 @@ class HomeController extends Controller
 
    public function list()
    {
-      $batch = BatchSoal::all();
+       $batch = BatchSoal::all();
+       
        return view('ujian.list')->with('batch', $batch);
    }
 
    public function mulai()
    {
-
-      $soal = Soal::with('subsoal')->paginate(1);
-
-      // return json_encode($soal);
-
-      return view('ujian.mulai')->with('soal', $soal);
+      return view('ujian.mulai');
+     
    }
+
+
+   
 }

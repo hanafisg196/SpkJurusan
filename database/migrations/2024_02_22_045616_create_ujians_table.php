@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('ujians', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('subsoal_id');
+            $table->unsignedBigInteger('soal_id');
             $table->timestamps();
         });
     }
