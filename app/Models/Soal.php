@@ -21,4 +21,10 @@ class Soal extends Model
     {
         return $this->belongsTo(BatchSoal::class, 'batch_id','id');
     }
+
+    public function nilaicf()
+    {
+        return $this->belongsTo(NilaiCF::class, 'nilaicf_id','id');
+    }
+
 }

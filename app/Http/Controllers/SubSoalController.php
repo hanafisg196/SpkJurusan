@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Soal;
+use App\Models\NilaiCF;
 use App\Models\SubSoal;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,8 @@ class SubSoalController extends Controller
     public function index()
     {
         $datas = Soal::with('subsoal')->get();
-        return view('subsoal.index', compact('datas'));
+        $nilaicf = NilaiCF::all();
+        return view('subsoal.index', compact('datas','nilaicf'));
     }
 
     /**
@@ -32,15 +34,13 @@ class SubSoalController extends Controller
     {
         // Validasi input subsoal
         $request->validate([
-            'jawaban' => 'required',
-            'nilai' => 'required',
+            'nilaicf_id' => 'required',
         ]);
 
         // Simpan subsoal ke dalam database
         $soal = Soal::findOrFail($id);
         $soal->subsoal()->create([
-            'jawaban' => $request->jawaban,
-            'nilai' => $request->nilai,
+            'nilaicf_id' => $request->nilaicf_id,
         ]);
 
         // Redirect atau tampilkan pesan sukses

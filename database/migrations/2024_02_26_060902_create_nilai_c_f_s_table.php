@@ -11,15 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sub_soals', function (Blueprint $table) {
+        Schema::create('nilai_c_f_s', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('nilaicf_id')->nullable();
-            $table->unsignedBigInteger('soal_id');
+            $table->string('term');
+            $table->float('cf');
             $table->timestamps();
-
-            $table->foreign("soal_id")->on("soals")->references("id");
-            $table->foreign("nilaicf_id")->on("nilai_c_f_s")->references("id");
-
         });
     }
 
@@ -28,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sub_soals');
+        Schema::dropIfExists('nilai_c_f_s');
     }
 };

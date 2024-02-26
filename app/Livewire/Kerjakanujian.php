@@ -6,6 +6,7 @@ use App\Models\Soal;
 use App\Models\Ujian;
 use Livewire\Livewire;
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class Kerjakanujian extends Component
@@ -17,39 +18,43 @@ class Kerjakanujian extends Component
     public function mount()
     {
         $this->user_id = auth()->user()->id;
-        $currentPage = request()->has('page') ? request()->query('page') : 1;
-        $this->subsoal_id = Session::get('jawaban_' . $currentPage);
     }
 
     public function render()
     {
         return view('livewire.kerjakanujian',[
-            "soal" => Soal::with('subsoal')->paginate(1)
+            'soal' => Soal::with('subsoal')->paginate(15)
         ]);
 
     }
 
-    public function store()
+
+    public function selectSoal($soalId)
     {
-        $this->validate([
-            'user_id' => 'required',
-            'subsoal_id' => 'required'
-        ]);
+        $this->selectedSoal = $this->soals->find($soalId);
+        $this->selectedAnswer = null;
 
-        $currentPage = request()->has('page') ? request()->query('page') : 1;
-        Session::put('jawaban_' . $currentPage, $this->subsoal_id);
+    }
+    public function selectAnswer($subSoalId, $selectedAnswer)
+    {
+        $user = Auth::user();
+        // check answr exist or not
+        $ujian = Ujian::where('soal_id', $this->selectedSoal->id)->first();
 
-        Ujian::updateOrCreate([
-            'user_id' => $this->user_id,
-            'subsoal_id' => $this->subsoal_id
-        ]);
+        if ($ujian) {
+            // if answer is exist update properties
+            $ujian->update(['subsoal_id' => $subSoalId, 'selected_answer' => $selectedAnswer]);
+        } else {
+            // if doesnt exist creta new properties
+            Ujian::create([
+                'user_id' => $user->id,
+                'soal_id' => $this->selectedSoal->id,
+                'subsoal_id' => $subSoalId,
+                'selected_answer' => $selectedAnswer,
+            ]);
+        }
 
-        // Retrieve the current 'id' parameter from the URL
-        $id = 1;
-
-        // Move to the next question by incrementing the 'page' parameter
-        $this->redirect(route('kerjakan.edit.page', ['id' => $id, 'page' => $currentPage + 1]));
-
+        $this->selectedAnswer = $selectedAnswer;
     }
 
 

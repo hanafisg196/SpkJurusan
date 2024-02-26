@@ -4,7 +4,7 @@
 <!-- Contextual classes table starts -->
     <div class="card">
         <div class="card-header">
-            <h5>Tabel Data Siswa</h5>
+            <h5>Tabel Nilai CF</h5>
             <div class="card-header-right">
                 <ul class="list-unstyled card-option">
                     <li><i class="fa fa-chevron-left"></i></li>
@@ -33,14 +33,12 @@
         <div class="card-block table-border-style">
             <div class="table-responsive">
                 <table class="table">
-                    <caption>Data Siswa</caption>
+                    <caption>Data Nilai CF</caption>
                     <thead>
                         <tr>
-                            <th>Kode</th>
-                            <th>Batch</th>
-                            <th>Soal</th>
-                            <th>Jenis</th>
-                            <th>Nilai CF(Rule)</th>
+                            <th>No</th>
+                            <th>Certainty Term</th>
+                            <th>CF</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -51,20 +49,19 @@
                             white-space: pre-wrap;
                         }
                     </style>
+                    @php $no = 1; @endphp
                     <tbody>
                         @foreach ($data as $datas)
                         <tr>
-                            <td>{{ $datas->kode }}</td>
-                            <td>{{ $datas->batch->kode }}</td>
-                            <td>{{ $datas->soal }}</td>
-                            <td>{{ $datas->jenis }}</td>
-                            <td>{{ $datas->nilaicf->term }}</td>
+                            <th scope="row">{{ $no++}}</th>
+                            <td>{{ $datas->term }}</td>
+                            <td>{{ $datas->cf }}</td>
                             <td>
                                 <button type="button" class="btn btn-primary exampleModaledit"
                                  data-toggle="modal" data-target="#exampleModaledit{{ $datas->id }}">
                                     <i class="ti-pencil"></i>
                                 </button>
-                                <form action="/soal/{{ $datas->id }}" method="POST" class="d-inline">
+                                <form action="/nialicf/{{ $datas->id }}" method="POST" class="d-inline">
                                     @method('delete')
                                     @csrf
                                     <button class="ti-trash btn btn-danger"
@@ -87,35 +84,23 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Soal</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Data</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="/soal" enctype="multipart/form-data">
+                <form method="POST" action="/nilaicf" enctype="multipart/form-data">
                     @csrf
                     <div class="card-block">
 
-
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Batch</label>
-                            <div class="col-md-9">
-                                <select class="form-control" name="batch_id" >
-                                    @foreach ($batch as $items )
-                                    <option value="{{ $items->id }}">{{ $items->kode }}</option>
-                                @endforeach
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Kode</label>
+                            <label class="col-sm-3 col-form-label">Certainty Term</label>
                             <div class="col-sm-9">
-                                <input type="text" id="kode" name="kode" class="form-control @error('kode') is-invalid @enderror"
-                                value="{{ old('kode') }}" required>
+                                <input type="text" id="term" name="term" class="form-control @error('term') is-invalid @enderror"
+                                value="{{ old('term') }}" required>
 
-                                @error('kode')
+                                @error('term')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -125,12 +110,12 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Soal</label>
+                            <label class="col-sm-3 col-form-label">CF</label>
                             <div class="col-sm-9">
-                                <textarea name="soal" id="soal" cols="30" rows="5"
-                                class="form-control" required placeholder="Tulis soal..."></textarea>
+                                <input type="text" id="cf" name="cf" class="form-control @error('cf') is-invalid @enderror"
+                                value="{{ old('cf') }}" required>
 
-                                @error('soal')
+                                @error('cf')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -138,32 +123,6 @@
 
                             </div>
                         </div>
-
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Jenis</label>
-                            <div class="col-sm-9">
-                                <input type="text" id="jenis" name="jenis" class="form-control @error('jenis') is-invalid @enderror"
-                                value="{{ old('jenis') }}" required>
-
-                                @error('jenis')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Nilai CF(Rule)</label>
-                            <div class="col-md-9">
-                                <select class="form-control" name="nilaicf_id" >
-                                    @foreach ($nilaicf as $items )
-                                    <option value="{{ $items->id }}">{{ $items->term }}</option>
-                                @endforeach
-                                </select>
-                            </div>
-                        </div>
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -190,32 +149,17 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="{{ url('/editsoal', $datas->id) }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ url('/editnilaicf', $datas->id) }}" enctype="multipart/form-data">
                         @csrf
                         <div class="card-block">
 
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Nilai CF(Rule)</label>
-                                <div class="col-md-9">
-                                    <select class="form-control" name="batch_id">
-                                        @foreach ($batch as $item)
-                                        @if(old('batch_id', $datas->batch_id) == $item->id)
-                                            <option value="{{ $item->id }}" selected>{{ $item->kode }}</option>
-                                        @else
-                                            <option value="{{ $item->id }}">{{ $item->kode }}</option>
-                                        @endif
-
-                                    @endforeach
-                                    </select>
-                                </div>
-                            </div>
 
                             <div class="form-group row">
-                                <label for="kode" class="col-sm-3 col-form-label">Kode</label>
+                                <label for="term" class="col-sm-3 col-form-label">Certeinty Term</label>
                                 <div class="col-sm-9">
-                                    <input type="text" id="kode" name="kode" class="form-control
-                                     @error('kode') is-invalid @enderror" value="{{ $datas->kode }}" required>
-                                    @error('kode')
+                                    <input type="text" id="term" name="term" class="form-control
+                                     @error('term') is-invalid @enderror" value="{{ $datas->term }}" required>
+                                    @error('term')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
@@ -224,46 +168,15 @@
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Soal</label>
+                                <label for="cf" class="col-sm-3 col-form-label">CF</label>
                                 <div class="col-sm-9">
-                                    <textarea name="soal" id="soal" cols="30" rows="5"
-                                    class="form-control" required placeholder="Tulis soal...">{{ $datas->soal }}</textarea>
-
-                                    @error('soal')
+                                    <input type="text" id="cf" name="cf" class="form-control
+                                     @error('cf') is-invalid @enderror" value="{{ $datas->cf }}" required>
+                                    @error('cf')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                     @enderror
-
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="jenis" class="col-sm-3 col-form-label">Jenis</label>
-                                <div class="col-sm-9">
-                                    <input type="text" id="jenis" name="jenis" class="form-control
-                                     @error('jenis') is-invalid @enderror" value="{{ $datas->jenis }}" required>
-                                    @error('jenis')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Nilai CF(Rule)</label>
-                                <div class="col-md-9">
-                                    <select class="form-control" name="nilaicf_id">
-                                        @foreach ($nilaicf as $item)
-                                        @if(old('nilaicf_id', $datas->nilaicf_id) == $item->id)
-                                            <option value="{{ $item->id }}" selected>{{ $item->term }}</option>
-                                        @else
-                                            <option value="{{ $item->id }}">{{ $item->term }}</option>
-                                        @endif
-
-                                    @endforeach
-                                    </select>
                                 </div>
                             </div>
                         </div>

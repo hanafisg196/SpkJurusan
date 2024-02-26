@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\BatchSoalController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SoalController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\UjianController;
+use App\Http\Controllers\NilaiCFController;
 use App\Http\Controllers\SubSoalController;
+use App\Http\Controllers\BatchSoalController;
 use App\Http\Controllers\PihakSekolahController;
 
 
@@ -45,6 +46,8 @@ Route::group(['middleware' => ['auth', 'checkrole:admin']], function () {
     Route::post('/editsoal/{id}', [SoalController::class,'editsoal']);
     Route::resource('/subsoal',SubSoalController::class);
     Route::post('/tambahjawaban/{id}', [SubSoalController::class,'tambahjawaban']);
+    Route::resource('/nilaicf',NilaiCFController::class);
+    Route::post('/editnilaicf/{id}', [NilaiCFController::class,'editnilaicf']);
     Route::resource('/batch',BatchSoalController::class);
     Route::post('/batch/{id}', [BatchSoalController::class,'edit']);
 
@@ -64,7 +67,7 @@ Route::group(['middleware' => ['auth', 'checkrole:guru']], function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'home'])->name('home');
     Route::get('/ujian', [HomeController::class, 'list']);
-    Route::get('/kerjakan/{id}/edit', [HomeController::class, 'mulai'])->name('kerjakan.edit');
+    Route::get('/kerjakan', [HomeController::class, 'mulai'])->name('kerjakan.edit');
 
     Route::get('/kerjakan/{id}/edit?page={page}', [HomeController::class, 'mulai'])
         ->name('kerjakan.edit.page')

@@ -15,4 +15,9 @@ class SubSoal extends Model
     {
         return $this->belongsTo(Soal::class);
     }
+
+    public function nilaicf()
+    {
+        return $this->belongsTo(NilaiCF::class, 'nilaicf_id','id');
+    }
 }

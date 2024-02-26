@@ -66,8 +66,18 @@
             </li>
         </ul>
 
+        <ul class="pcoded-item pcoded-left-item">
+            <li class="{{ request()->segment(1)=='nilaicf'? 'active' : '' }}">
+                <a href="/nilaicf">
+                    <span class="pcoded-micon"><i class="ti-clipboard"></i></span>
+                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Nilai CF</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+        </ul>
+
         @elseif  (auth()->user()->role == 'guru')
-        
+
         <ul class="pcoded-item pcoded-left-item">
 
             <ul class="pcoded-item pcoded-left-item">
@@ -79,7 +89,7 @@
                     </a>
                 </li>
             </ul>
-            
+
             <li class="{{ request()->segment(1)=='hasilujian'? 'active' : '' }}">
                 <a href="/hasilujian">
                     <span class="pcoded-micon"><i class="ti-list-ol"></i></i></span>
@@ -91,7 +101,7 @@
 
         @endif
 
-    
+
 
     </div>
 

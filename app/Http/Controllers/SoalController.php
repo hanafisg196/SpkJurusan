@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BatchSoal;
+use App\Models\NilaiCF;
 use App\Models\Soal;
+use App\Models\SubSoal;
+use App\Models\BatchSoal;
 use Illuminate\Http\Request;
 
 class SoalController extends Controller
@@ -15,11 +17,13 @@ class SoalController extends Controller
     {
 
         $batch = BatchSoal::all();
-        $data = Soal::latest()->get();
+        $nilaicf = NilaiCF::all();
+        $data = Soal::all();
 
         return view('soal.index')->with([
             'data'=> $data,
-            'batch'=> $batch
+            'batch'=> $batch,
+            'nilaicf'=> $nilaicf
         ]);
     }
 
@@ -33,7 +37,8 @@ class SoalController extends Controller
             "kode" => "required",
             "soal" => "required",
             "jenis" => "required",
-            "batch_id" => "required"
+            "batch_id" => "required",
+            "nilaicf_id" => "required"
         ]);
         $validatedData['batch_id'] = $request->input('batch_id');
 
@@ -53,6 +58,7 @@ class SoalController extends Controller
         $soal->kode = $request->kode;
         $soal->soal = $request->soal;
         $soal->jenis = $request->jenis;
+        $soal->nilaicf_id = $request->nilaicf_id;
         $soal->save();
         return redirect()->back();
     }

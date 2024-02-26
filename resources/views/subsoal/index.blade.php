@@ -27,16 +27,14 @@
                             </div>
                             <table class="table table-striped mb-5">
                                 <tr>
-                                    <th>No</th>
+                                    <th>Opsi</th>
                                     <th>Jawaban</th>
-                                    <th>Nilai</th>
                                     <th>Aksi</th>
                                 </tr>
                                 @foreach ($data->subsoal as $isi)
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $isi->jawaban }}</td>
-                                        <td>{{ $isi->nilai }}</td>
+                                        <td>{{ chr(96 + $loop->iteration) }}</td>
+                                        <td>{{ $isi->nilaicf->term }}</td>
                                         <td>
                                             <form action="/subsoal/{{ $isi->id }}" method="POST">
                                                 @csrf
@@ -49,7 +47,6 @@
                             </table>
                 @endforeach
         </div>
-
     </div>
 </div>
 
@@ -68,14 +65,15 @@
                     <form method="POST" action="{{ url('/tambahjawaban', $data->id) }}" enctype="multipart/form-data">
                         @csrf
                         <div class="card-block">
-                            <div class="mb-3">
-                                <label for="jawaban" class="form-label">Jawaban</label>
-                                <input type="text" name="jawaban" id="jawaban" class="form-control" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="nilai" class="form-label">Nilai</label>
-                                <input type="text" name="nilai" id="nilai" class="form-control" required>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Jawaban</label>
+                                <div class="col-md-9">
+                                    <select class="form-control" name="nilaicf_id" >
+                                        @foreach ($nilaicf as $items )
+                                        <option value="{{ $items->id }}">{{ $items->term }}</option>
+                                    @endforeach
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer">
