@@ -14,7 +14,12 @@ class Soal extends Model
 
     public function subsoal()
     {
-        return $this->hasMany(SubSoal::class);
+        return $this->hasMany(SubSoal::class, 'soal_id', 'id');
+    }
+
+    public function ujian()
+    {
+        return $this->hasMany(Ujian::class, 'soal_id','id');
     }
 
     public function batch()

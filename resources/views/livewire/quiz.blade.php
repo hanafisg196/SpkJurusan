@@ -30,11 +30,15 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 @foreach($soals as $soal)
-                                <button  wire:click="selectSoal({{ $soal->id }})"
-                                    class="btn btn-primary">
-                                     {{ $soal->id }}</button>
+                                    <button wire:click="selectSoal({{ $soal->id }})"
+                                        class="btn @if($soal->ujian->isEmpty() ||
+                                        $soal->ujian->first()->selected_answer === null)
+                                         btn-primary @else btn-danger @endif">
+                                        {{ $soal->id }}
+                                    </button>
                                 @endforeach
                             </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -52,14 +56,14 @@
                                         <div class="col-lg-4">
                                             @foreach ($selectedSoal->subsoal as $sub)
                                             <label for="option{{ $sub->id }}">
-                                                <input type="radio" id="option{{ $sub->id }}"
+                                                <input type="radio" name="radioButton" id="option{{ $sub->id }}"
                                                 wire:click="selectAnswer({{ $sub->id }},
                                                 '{{ $sub->nilaicf_id }}')" wire:model="selectedAnswer"
-                                                value="{{ $sub->nilaicf_id }}">
+                                                value="{{ $sub->nilaicf_id }}" >
                                                 {{ $sub->nilaicf->term }}
                                             </label>
                                             <br>
-                                        @endforeach
+                                           @endforeach
                                         </div>
                                         @endif
                                     </div>
@@ -80,17 +84,18 @@
                 </div>
             </div>
             
+            
     </div>
     </div>
+
     
-     <!-- Ujian End -->
-
-
-
+ 
 </div>
  <!-- Livewire-->
 
 
 
+  
 
+  
 

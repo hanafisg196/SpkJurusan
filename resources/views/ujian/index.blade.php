@@ -28,5 +28,34 @@
         </div>
     </div>
 </div>
+@foreach ($soal as $item)
+  <button id="colorChangeButton_{{ $item->id }}" data-id="{{ $item->id }}">{{ $item->id }}</button>
+  @foreach ($soal as $subsoal)
+    <input type="radio" class="radioButton" name="colorRadio"
+    data-parent-id="{{ $item->id }}"
+     onchange="changeButtonColor('{{ $item->id }}')">{{ $subsoal->id }}
+  @endforeach
+@endforeach
+
+<script>
+  function changeButtonColor(buttonId) {
+    var colorChangeButton = document.getElementById('colorChangeButton_' + buttonId);
+    var radioButtons = document.querySelectorAll('.radioButton[data-parent-id="' + buttonId + '"]');
+
+    // Reset all buttons to default color
+    document.querySelectorAll('.colorChangeButton').forEach(function(button) {
+      button.style.backgroundColor = "green";
+    });
+
+    // Set the background color based on the checked radio button
+    radioButtons.forEach(function(radioButton) {
+      if (radioButton.checked) {
+        colorChangeButton.style.backgroundColor = "red";
+      }
+    });
+  }
+</script>
+
+
 <!-- Categories Start -->
 @endsection

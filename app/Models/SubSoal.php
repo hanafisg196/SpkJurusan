@@ -13,11 +13,16 @@ class SubSoal extends Model
 
     public function soal()
     {
-        return $this->belongsTo(Soal::class);
+        return $this->belongsTo(Soal::class, 'soal_id', 'id');
     }
 
     public function nilaicf()
     {
         return $this->belongsTo(NilaiCF::class, 'nilaicf_id','id');
+    }
+
+    public function ujian()
+    {
+        return $this->hasMany(Ujian::class, 'subsoal_id','id');
     }
 }

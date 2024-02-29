@@ -13,29 +13,35 @@ class Quiz extends Component
     public $selectedSoal;
     public $ujian;
     public $currentIndex;
+    public $radioButton = "radioButton";
+    public $colorChangeButton  = "colorChangeButton";
     public $selectedAnswer;
-
- 
     protected $listeners = ['refreshQuiz' => 'render'];
+
 
 
     public function render()
     {
-        $this->soals = Soal::with('subsoal')->get();
-
+        $this->soals = Soal::with('subsoal')
+        ->with('ujian')->get();
+       
+    //    dd($this->soals);
+       
         //take first id for soals
         if (!$this->selectedSoal && count($this->soals) > 0) {
             $this->selectedSoal = $this->soals->first();
         }
+         
 
          // Retrieve the user's previous answer for the current question
         $this->ujian = Ujian::where('soal_id', $this->selectedSoal->id)
         ->where('user_id', auth()->user()->id)
         ->first();
+        
 
         // Set $this->selectedAnswer to the previous answer if available, otherwise set it to null
         $this->selectedAnswer = $this->ujian ?  $this->ujian->selected_answer : null;
-
+        
         return view('livewire.quiz');
     }
 
@@ -43,23 +49,28 @@ class Quiz extends Component
     {
          $this->selectedSoal = $this->soals->find($soalId);
 
-         
         // Retrieve the user's previous answer for the current question
          $this->ujian;
+        
         // Set $this->selectedAnswer to the previous answer if available, otherwise set it to null
          $this->selectedAnswer = $this->ujian ?  $this->ujian->selected_answer : null;
 
     }
 
+    
+
     public function selectAnswer($subSoalId, $selectedAnswer)
     {
         // Check if the user has answered this question before
         $this->ujian;
+      
 
         if ($this->ujian) {
             // If the user has answered, update the answer
             $this->ujian->update(['subsoal_id' => $subSoalId, 'selected_answer' => $selectedAnswer]);
-            $this->selectedAnswer = $selectedAnswer;
+            
+          
+            
         } else {
             // If not, create a new answer record
             Ujian::create([
@@ -68,7 +79,9 @@ class Quiz extends Component
                 'subsoal_id' => $subSoalId,
                 'selected_answer' => $selectedAnswer,
             ]);
-            $this->selectedAnswer = $selectedAnswer;
+            
+            
+        
         }
 
         // Emit an event to refresh the quiz for other components or if the page is refreshed
@@ -104,7 +117,6 @@ class Quiz extends Component
         }
         
     }
-
 
 }
 

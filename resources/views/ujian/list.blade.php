@@ -13,7 +13,7 @@
                         <h5 class="card-title">{{ $item->title }}</h5>
                         <p class="card-text">Ujian Penetuan Jurusan</p>
                         <a href="/kerjakan" class="btn btn-primary">Kerjakan</a>
-                      </div>
+                    </div>
                   </div>
             </div>
             @endforeach
@@ -27,7 +27,5 @@
 
 </div>
 
-
-</div>
 
 @endsection

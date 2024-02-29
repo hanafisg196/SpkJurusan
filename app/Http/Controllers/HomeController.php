@@ -17,7 +17,8 @@ class HomeController extends Controller
 
    public function home()
    {
-     return view('ujian.index');
+    $soal = Soal::with('subsoal')->get();
+     return view('ujian.index')->with('soal', $soal);
    }
 
    public function list()
@@ -29,12 +30,6 @@ class HomeController extends Controller
    public function mulai()
    {
 
-
-
-        // return json_encode($soal);
-
         return view('ujian.mulai');
-
-       //$batchsoal = BatchSoal::find($id);
    }
 }
