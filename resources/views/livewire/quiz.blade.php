@@ -30,14 +30,21 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 @foreach($soals as $soal)
-                                    <button wire:click="selectSoal({{ $soal->id }})"
-                                        class="btn @if($soal->ujian->isEmpty() ||
-                                        $soal->ujian->first()->selected_answer === null)
-                                         btn-primary @else btn-danger @endif">
+
+                               
+                                    @php
+                                        $colors = $color->where('soal_id', $soal->id)->first();
+                                        $selectedAnswer = $colors ? $colors->selected_answer : null;
+                                        $buttonColor = $selectedAnswer ? 'btn-danger' : 'btn-primary';
+                                    @endphp
+                            
+                                    <button wire:click="selectSoal({{ $soal->id }})" class="btn {{ $buttonColor }}">
                                         {{ $soal->id }}
                                     </button>
                                 @endforeach
                             </div>
+                            
+                            
                             
                         </div>
                     </div>
@@ -89,7 +96,7 @@
     </div>
 
     
- 
+  
 </div>
  <!-- Livewire-->
 

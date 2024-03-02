@@ -9,6 +9,7 @@ use Livewire\Component;
 
 class Quiz extends Component
 {
+    
     public $soals;
     public $selectedSoal;
     public $ujian;
@@ -16,45 +17,33 @@ class Quiz extends Component
     public $radioButton = "radioButton";
     public $colorChangeButton  = "colorChangeButton";
     public $selectedAnswer;
+    public $color;
     protected $listeners = ['refreshQuiz' => 'render'];
 
-
-
+    
+ 
     public function render()
     {
-        $this->soals = Soal::with('subsoal')
-        ->with('ujian')->get();
-       
-    //    dd($this->soals);
-       
+        $this->soals = Soal::with('ujian')->get();
+
         //take first id for soals
         if (!$this->selectedSoal && count($this->soals) > 0) {
             $this->selectedSoal = $this->soals->first();
         }
-         
-
-         // Retrieve the user's previous answer for the current question
-        $this->ujian = Ujian::where('soal_id', $this->selectedSoal->id)
-        ->where('user_id', auth()->user()->id)
-        ->first();
         
-
-        // Set $this->selectedAnswer to the previous answer if available, otherwise set it to null
-        $this->selectedAnswer = $this->ujian ?  $this->ujian->selected_answer : null;
-        
+        $this->previousAnswer();
+        $this->buttonColor();
+   
         return view('livewire.quiz');
     }
 
     public function selectSoal($soalId)
     {
          $this->selectedSoal = $this->soals->find($soalId);
-
-        // Retrieve the user's previous answer for the current question
          $this->ujian;
+         
         
-        // Set $this->selectedAnswer to the previous answer if available, otherwise set it to null
-         $this->selectedAnswer = $this->ujian ?  $this->ujian->selected_answer : null;
-
+         
     }
 
     
@@ -116,6 +105,21 @@ class Quiz extends Component
             $this->selectedSoal = $this->soals[ $this->currentIndex - 1];
         }
         
+    }
+
+    public function buttonColor()
+    {
+        $this->color = Ujian::where('user_id', auth()->user()->id)->get();
+    }
+
+    public function previousAnswer()
+    {
+         // Retrieve the user's previous answer for the current question
+
+         $this->ujian = Ujian::where('soal_id', $this->selectedSoal->id)
+         ->where('user_id', auth()->user()->id)
+         ->first();
+         $this->selectedAnswer = $this->ujian ?  $this->ujian->selected_answer : null;
     }
 
 }
