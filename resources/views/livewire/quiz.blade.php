@@ -1,9 +1,9 @@
 
- 
+
  <!-- Livewire-->
 <div>
- 
-   
+
+
      <!-- Navbar Start -->
      <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
          <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
@@ -12,21 +12,21 @@
          <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
              <span class="navbar-toggler-icon"></span>
          </button>
-         <div class="collapse navbar-collapse" id="navbarCollapse">
+         {{-- <div class="collapse navbar-collapse" id="navbarCollapse">
              <div class="navbar-nav p-4 p-lg-0" style="margin-left: 30%">
                  <h5>0/100</h5>
              </div>
-         </div>
+         </div> --}}
      </nav>
      <!-- Navbar End -->
-             
+
      <!-- Ujian Start -->
-     
+
      <div class="container-xxl py-5 category">
         <div class="container">
             <div class="row g-3">
-                <div class="card-body">
-                    <div class="col-lg-12">
+                <div class="card-body" style="background-color:rgb(210, 210, 210)">
+                    <div class="col-lg-12" >
                         <div class="row">
                             <div class="col-lg-12">
                                 @foreach($soals as $soal)
@@ -43,9 +43,7 @@
                                     </button>
                                 @endforeach
                             </div>
-                            
-                            
-                            
+
                         </div>
                     </div>
                 </div>
@@ -53,7 +51,7 @@
 
             <div class="row g-3">
                 <div class="card" style="border: 0ch">
-                    <div class="card-header" style="background-color:rgb(210, 210, 210)">
+                    <div class="card-header">
                         <div class="card-body">
                             <div class="col-lg-11 mx-auto">
                                 <div class="row">
@@ -80,29 +78,29 @@
                     </div>
                 </div>
             </div>
-            <br>
-            <div class="col-lg-12">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <button wire:click="selectPrevQuestion" class="btn btn-primary">Prev</button>
-                        <button wire:click="selectNextQuestion" class="btn btn-primary">Next</button>
-                        
+            <div class="card-footer" style="background-color:rgb(210, 210, 210)">
+                <div class="col-lg-12" >
+                    <div class="row text-center">
+                        <div class="col-lg-12">
+                            <button wire:click="selectPrevQuestion" class="btn btn-primary">Prev</button>
+                            <button wire:click="selectNextQuestion" class="btn btn-primary">Next</button>
+                            <a href="/hasilsiswa" class="btn btn-primary">Selesai</a>
+                        </div>
                     </div>
                 </div>
             </div>
-            
-            
+
+
     </div>
     </div>
 
-    
-  
+
 </div>
  <!-- Livewire-->
 
 
 
-  
 
-  
+
+
 

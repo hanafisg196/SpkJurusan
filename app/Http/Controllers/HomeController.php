@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BatchSoal;
 use App\Models\Soal;
+use App\Models\Ujian;
+use App\Models\BatchSoal;
 use Illuminate\Bus\Batch;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -20,6 +22,18 @@ class HomeController extends Controller
     $soal = Soal::with('subsoal')->get();
      return view('ujian.index')->with('soal', $soal);
    }
+
+   public function hasil()
+    {
+
+        $userId = Auth::id();
+
+        $hasil = Ujian::with('subsoal')
+            ->where('user_id', $userId)
+            ->get();
+
+        return view('ujian.hasil')->with('hasil', $hasil);
+    }
 
    public function list()
    {

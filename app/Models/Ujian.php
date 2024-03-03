@@ -26,5 +26,10 @@ class Ujian extends Model
         return $this->belongsTo(SubSoal::class, 'subsoal_id','id');
     }
 
+    public function nilaicf()
+    {
+        return $this->belongsTo(NilaiCF::class, 'nilaicf_id','id');
+    }
+
 
 }

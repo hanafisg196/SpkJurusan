@@ -40,6 +40,7 @@ class SoalController extends Controller
             "batch_id" => "required",
             "nilaicf_id" => "required"
         ]);
+        $validatedData['jenis'] = strtolower($request->input('jenis'));
         $validatedData['batch_id'] = $request->input('batch_id');
 
         Soal::create($validatedData);
@@ -57,7 +58,7 @@ class SoalController extends Controller
         // Simpan data yang telah diedit
         $soal->kode = $request->kode;
         $soal->soal = $request->soal;
-        $soal->jenis = $request->jenis;
+        $soal->jenis = strtolower($request->jenis);
         $soal->nilaicf_id = $request->nilaicf_id;
         $soal->save();
         return redirect()->back();
