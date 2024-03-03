@@ -18,6 +18,7 @@ class Quiz extends Component
     public $colorChangeButton  = "colorChangeButton";
     public $selectedAnswer;
     public $color;
+    public $count = 0;
     protected $listeners = ['refreshQuiz' => 'render'];
 
     
@@ -33,6 +34,7 @@ class Quiz extends Component
         
         $this->previousAnswer();
         $this->buttonColor();
+        $this->answerCounter();
    
         return view('livewire.quiz');
     }
@@ -120,6 +122,17 @@ class Quiz extends Component
          ->where('user_id', auth()->user()->id)
          ->first();
          $this->selectedAnswer = $this->ujian ?  $this->ujian->selected_answer : null;
+    }
+
+
+    public function answerCounter()
+    {
+        $this->count = Ujian::where('user_id', auth()->user()->id)->count();
+
+        if($this->count == 4)
+        {
+            return redirect('/hasilsiswa');
+        }
     }
 
 }

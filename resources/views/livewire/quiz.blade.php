@@ -17,6 +17,8 @@
                  <h5>0/100</h5>
              </div>
          </div> --}}
+         <p class="text-center">{{ $count }}/100</p>
+         </nav>
      </nav>
      <!-- Navbar End -->
 
