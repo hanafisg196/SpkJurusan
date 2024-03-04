@@ -12,7 +12,9 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ $item->title }}</h5>
                         <p class="card-text">Ujian Penetuan Jurusan</p>
-                        <a href="/kerjakan" class="btn btn-primary">Kerjakan</a>
+                        
+                        @livewire('doneCounter')
+                        
                     </div>
                   </div>
             </div>

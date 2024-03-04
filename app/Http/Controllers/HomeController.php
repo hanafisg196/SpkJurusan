@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Soal;
 use App\Models\Ujian;
 use App\Models\BatchSoal;
-use Illuminate\Bus\Batch;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -37,13 +35,19 @@ class HomeController extends Controller
 
    public function list()
    {
-      $batch = BatchSoal::all();
+       $batch = BatchSoal::all();
+      
        return view('ujian.list')->with('batch', $batch);
    }
 
    public function mulai()
    {
-
+    
+    $ujian = Ujian::where('user_id', auth()->user()->id)->count();
+    if($ujian == 4)
+    {
+     return redirect('/hasilsiswa');
+    }
         return view('ujian.mulai');
    }
 }
