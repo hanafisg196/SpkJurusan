@@ -9,7 +9,7 @@ use Livewire\Component;
 
 class Quiz extends Component
 {
-    
+
     public $soals;
     public $selectedSoal;
     public $ujian;
@@ -21,8 +21,8 @@ class Quiz extends Component
     public $count = 0;
     protected $listeners = ['refreshQuiz' => 'render'];
 
-    
- 
+
+
     public function render()
     {
         $this->soals = Soal::with('ujian')->get();
@@ -31,11 +31,11 @@ class Quiz extends Component
         if (!$this->selectedSoal && count($this->soals) > 0) {
             $this->selectedSoal = $this->soals->first();
         }
-        
+
         $this->previousAnswer();
         $this->buttonColor();
         $this->answerCounter();
-   
+
         return view('livewire.quiz');
     }
 
@@ -43,25 +43,25 @@ class Quiz extends Component
     {
          $this->selectedSoal = $this->soals->find($soalId);
          $this->ujian;
-         
-        
-         
+
+
+
     }
 
-    
+
 
     public function selectAnswer($subSoalId, $selectedAnswer)
     {
         // Check if the user has answered this question before
         $this->ujian;
-      
+
 
         if ($this->ujian) {
             // If the user has answered, update the answer
             $this->ujian->update(['subsoal_id' => $subSoalId, 'selected_answer' => $selectedAnswer]);
-            
-          
-            
+
+
+
         } else {
             // If not, create a new answer record
             Ujian::create([
@@ -70,9 +70,9 @@ class Quiz extends Component
                 'subsoal_id' => $subSoalId,
                 'selected_answer' => $selectedAnswer,
             ]);
-            
-            
-        
+
+
+
         }
 
         // Emit an event to refresh the quiz for other components or if the page is refreshed
@@ -84,14 +84,14 @@ class Quiz extends Component
         //search id from soals
         $this->currentIndex = $this->soals->search(function ($soal){
             return $soal->id == $this->selectedSoal->id;
-        
+
         });
         //plus one id (id + 1)
         if ($this->currentIndex !== false && $this->currentIndex + 1 < count($this->soals)) {
             $this->selectedSoal = $this->soals[$this->currentIndex + 1];
-            
+
         }
-        
+
     }
 
     public function selectPrevQuestion()
@@ -99,14 +99,14 @@ class Quiz extends Component
         //search id from soals
         $this->currentIndex = $this->soals->search(function ($soal){
             return $soal->id == $this->selectedSoal->id;
-        
+
         });
         //less one id (id - 1)
         if ($this->currentIndex !== false &&  $this->currentIndex - 1 >= 0
         && $this->currentIndex -1 < count($this->soals)) {
             $this->selectedSoal = $this->soals[ $this->currentIndex - 1];
         }
-        
+
     }
 
     public function buttonColor()
@@ -129,7 +129,7 @@ class Quiz extends Component
     {
         $this->count = Ujian::where('user_id', auth()->user()->id)->count();
 
-        if($this->count == 4)
+        if($this->count == 16)
         {
             return redirect('/hasilsiswa');
         }
@@ -137,5 +137,5 @@ class Quiz extends Component
 
 }
 
-  
+
 

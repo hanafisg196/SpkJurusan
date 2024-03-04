@@ -52,7 +52,7 @@
                     @php $no = 1; @endphp
                     <tbody>
                         @foreach ($data as $datas)
-                            @if ($datas['role'] == "pihaksekolah")
+                            @if ($datas['role'] == "guru")
                                 <tr>
                                     <th scope="row">{{ $no++}}</th>
                                     <td>{{ $datas['name'] }}</td>
@@ -137,7 +137,7 @@
                             </div>
                         </div>
                         <input type="hidden" id="role" name="role" class="form-control @error('role') is-invalid @enderror"
-                        value="pihaksekolah" readonly>
+                        value="guru" readonly>
 
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Password</label>
@@ -225,7 +225,7 @@
                             </div>
 
                             <input type="hidden" id="role" name="role" class="form-control @error('role') is-invalid @enderror"
-                            value="pihaksekolah" readonly>
+                            value="guru" readonly>
 
 
                             <div class="form-group row">

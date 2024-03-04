@@ -48,15 +48,15 @@ class PihakSekolahController extends Controller
      */
     public function editpihaksekolah(Request $request, $id)
     {
-        $siswa = User::find($id);
+        $user = User::find($id);
 
         // Simpan data yang telah diedit
-        $siswa->name = $request->name;
-        $siswa->username = $request->username;
-        $siswa->jabatan = $request->jabatan;
-        $siswa->password = Hash::make($request['password']);
-        $siswa->role = $request->role;
-        $siswa->save();
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->jabatan = $request->jabatan;
+        $user->password = Hash::make($request['password']);
+        $user->role = $request->role;
+        $user->save();
         return redirect()->back();
     }
 
