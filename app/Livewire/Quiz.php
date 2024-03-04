@@ -19,6 +19,7 @@ class Quiz extends Component
     public $selectedAnswer;
     public $color;
     public $count = 0;
+    public $doneButtonVisibility = true;
     protected $listeners = ['refreshQuiz' => 'render'];
 
 
@@ -35,6 +36,9 @@ class Quiz extends Component
         $this->previousAnswer();
         $this->buttonColor();
         $this->answerCounter();
+
+        $this->buttonDoneVisibility();
+   
 
         return view('livewire.quiz');
     }
@@ -128,12 +132,25 @@ class Quiz extends Component
     public function answerCounter()
     {
         $this->count = Ujian::where('user_id', auth()->user()->id)->count();
+  
+    }
+    public function buttonDoneVisibility()
+    {
+        $this->count;
 
         if($this->count == 16)
         {
-            return redirect('/hasilsiswa');
+         $this->doneButtonVisibility = false;
         }
+
     }
+    public function doneExam()
+    {
+       
+        return redirect('/hasilsiswa');
+    }
+
+   
 
 }
 

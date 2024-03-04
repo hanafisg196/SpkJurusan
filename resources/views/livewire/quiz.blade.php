@@ -24,6 +24,8 @@
 
      <!-- Ujian Start -->
 
+    
+
      <div class="container-xxl py-5 category">
         <div class="container">
             <div class="row g-3">
@@ -86,7 +88,9 @@
                         <div class="col-lg-12">
                             <button wire:click="selectPrevQuestion" class="btn btn-primary">Prev</button>
                             <button wire:click="selectNextQuestion" class="btn btn-primary">Next</button>
-                            <a href="/hasilsiswa" class="btn btn-primary">Selesai</a>
+
+                           <button wire:click="doneExam" @if($doneButtonVisibility) hidden @endif
+                            class="btn btn-primary">Selesai Ujian</button>
                         </div>
                     </div>
                 </div>
