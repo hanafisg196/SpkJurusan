@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jurusan;
 use App\Models\Soal;
 use App\Models\Ujian;
 use App\Models\BatchSoal;
@@ -31,6 +32,20 @@ class HomeController extends Controller
             ->get();
 
         return view('ujian.hasil')->with('hasil', $hasil);
+    }
+
+    public function tambahjurusan(Request $request)
+    {
+        $user_id = Auth::id();
+        $validatedData = $request->validate([
+            'jurusan' => 'required',
+        ]);
+
+        $validatedData['user_id'] = $user_id;
+
+        Jurusan::create($validatedData);
+        $request->session()->flash('success','tambah data berhasil');
+        return redirect('/ujian');
     }
 
    public function list()

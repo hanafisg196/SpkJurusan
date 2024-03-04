@@ -173,19 +173,8 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Role</label>
-                            <div class="col-sm-9">
-                                <input type="text" id="role" name="role" class="form-control @error('role') is-invalid @enderror"
+                                <input type="hidden" id="role" name="role" class="form-control @error('role') is-invalid @enderror"
                                 value="siswa" readonly>
-
-                                @error('role')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-
-                            </div>
                         </div>
 
                         <div class="form-group row">
@@ -301,20 +290,8 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Role</label>
-                                <div class="col-sm-9">
-                                    <input type="text" id="role" name="role" class="form-control @error('role') is-invalid @enderror"
+                                    <input type="hidden" id="role" name="role" class="form-control @error('role') is-invalid @enderror"
                                     value="siswa" readonly>
-
-                                    @error('role')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-
-                                </div>
-                            </div>
 
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Password</label>

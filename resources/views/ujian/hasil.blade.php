@@ -637,6 +637,124 @@
             <p>
                 Selamat belajar dan semoga sukses dalam mengejar impian pendidikan dan karir Anda!
             </p>
+
+
+            <div class="text-center">
+                @if ( $PersenIntrovert > $PersenEkstrovert && $PersenSensing > $PersenIntuition  && $PersenThinking > $PersenFeeling && $PersenJudging > $PersenPerceiving )
+                    <form method="post" action="{{ route('tambah.jurusan') }}">
+                        @csrf
+                            <input type="hidden" name="jurusan" value="Teknik Komputer dan Jaringan">
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                    </form>
+
+                    @elseif ( $PersenIntrovert > $PersenEkstrovert && $PersenSensing > $PersenIntuition  && $PersenThinking > $PersenFeeling && $PersenPerceiving > $PersenJudging )
+                        <form method="post" action="{{ route('tambah.jurusan') }}">
+                            @csrf
+                            <input type="hidden" name="jurusan" value="Desain Komunikasi Visual">
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </form>
+
+                    @elseif ( $PersenIntrovert > $PersenEkstrovert && $PersenSensing > $PersenIntuition  && $PersenFeeling > $PersenThinking && $PersenJudging > $PersenPerceiving )
+                        <form method="post" action="{{ route('tambah.jurusan') }}">
+                            @csrf
+                            <input type="hidden" name="jurusan" value="Teknik Komputer dan Jaringan">
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </form>
+
+                    @elseif ( $PersenIntrovert > $PersenEkstrovert && $PersenSensing > $PersenIntuition  && $PersenFeeling > $PersenThinking && $PersenPerceiving > $PersenJudging )
+                        <form method="post" action="{{ route('tambah.jurusan') }}">
+                            @csrf
+                            <input type="hidden" name="jurusan" value="Desain Komunikasi Visual">
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </form>
+
+                    @elseif ( $PersenIntrovert > $PersenEkstrovert && $PersenIntuition > $PersenSensing && $PersenThinking > $PersenFeeling && $PersenJudging > $PersenPerceiving )
+                        <form method="post" action="{{ route('tambah.jurusan') }}">
+                            @csrf
+                            <input type="hidden" name="jurusan" value="Pengembangan Perangkat Lunak Gim">
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </form>
+
+                    @elseif ( $PersenIntrovert > $PersenEkstrovert && $PersenIntuition > $PersenSensing && $PersenThinking > $PersenFeeling && $PersenPerceiving > $PersenJudging )
+                        <form method="post" action="{{ route('tambah.jurusan') }}">
+                            @csrf
+                            <input type="hidden" name="jurusan" value="Pengembangan Perangkat Lunak Gim">
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </form>
+
+                    @elseif ( $PersenIntrovert > $PersenEkstrovert && $PersenIntuition > $PersenSensing && $PersenFeeling > $PersenThinking && $PersenJudging > $PersenPerceiving )
+                        <form method="post" action="{{ route('tambah.jurusan') }}">
+                            @csrf
+                            <input type="hidden" name="jurusan" value="Desain Komunikasi Visual">
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </form>
+
+                    @elseif ( $PersenIntrovert > $PersenEkstrovert && $PersenIntuition > $PersenSensing && $PersenFeeling > $PersenThinking && $PersenPerceiving > $PersenJudging )
+
+                        <form method="post" action="{{ route('tambah.jurusan') }}">
+                            @csrf
+                            <input type="hidden" name="jurusan" value="Produksi dan Siaran Program Televisi">
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </form>
+
+                    @elseif ( $PersenEkstrovert > $PersenIntrovert && $PersenSensing > $PersenIntuition && $PersenThinking > $PersenFeeling && $PersenJudging > $PersenPerceiving )
+                        <form method="post" action="{{ route('tambah.jurusan') }}">
+                            @csrf
+                            <input type="hidden" name="jurusan" value="Teknik Komputer dan Jaringan">
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </form>
+
+                    @elseif ( $PersenEkstrovert > $PersenIntrovert && $PersenSensing > $PersenIntuition && $PersenThinking > $PersenFeeling && $PersenPerceiving > $PersenJudging )
+                        <form method="post" action="{{ route('tambah.jurusan') }}">
+                            @csrf
+                            <input type="hidden" name="jurusan" value="Desain Komunikasi Visual">
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </form>
+
+                    @elseif ( $PersenEkstrovert > $PersenIntrovert && $PersenSensing > $PersenIntuition && $PersenFeeling > $PersenThinking && $PersenJudging > $PersenPerceiving )
+                        <form method="post" action="{{ route('tambah.jurusan') }}">
+                            @csrf
+                            <input type="hidden" name="jurusan" value="Produksi dan Siaran Program Televisi">
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </form>
+
+                    @elseif ( $PersenEkstrovert > $PersenIntrovert && $PersenSensing > $PersenIntuition && $PersenFeeling > $PersenThinking && $PersenPerceiving > $PersenJudging )
+                        <form method="post" action="{{ route('tambah.jurusan') }}">
+                            @csrf
+                            <input type="hidden" name="jurusan" value="Produksi dan Siaran Program Televisi">
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </form>
+
+                    @elseif ( $PersenEkstrovert > $PersenIntrovert && $PersenIntuition > $PersenSensing && $PersenThinking > $PersenFeeling && $PersenJudging > $PersenPerceiving )
+                        <form method="post" action="{{ route('tambah.jurusan') }}">
+                            @csrf
+                            <input type="hidden" name="jurusan" value="Pengembangan Perangkat Lunak Gim">
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </form>
+
+                    @elseif ( $PersenEkstrovert > $PersenIntrovert && $PersenIntuition > $PersenSensing && $PersenThinking > $PersenFeeling && $PersenPerceiving > $PersenJudging )
+                        <form method="post" action="{{ route('tambah.jurusan') }}">
+                            @csrf
+                            <input type="hidden" name="jurusan" value="Pengembangan Perangkat Lunak Gim">
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </form>
+
+                    @elseif ( $PersenEkstrovert > $PersenIntrovert && $PersenIntuition > $PersenSensing && $PersenFeeling > $PersenThinking && $PersenJudging > $PersenPerceiving )
+                        <form method="post" action="{{ route('tambah.jurusan') }}">
+                            @csrf
+                            <input type="hidden" name="jurusan" value="Teknik Komputer dan Jaringan">
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </form>
+
+                    @else
+                        <form method="post" action="{{ route('tambah.jurusan') }}">
+                            @csrf
+                            <input type="hidden" name="jurusan" value="Produksi dan Siaran Program Televisi">
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </form>
+
+                @endif
+            </div>
         </div>
     </div>
 </div>

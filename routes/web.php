@@ -69,6 +69,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/ujian', [HomeController::class, 'list']);
     Route::get('/hasilsiswa', [HomeController::class, 'hasil']);
     Route::get('/kerjakan', [HomeController::class, 'mulai'])->name('kerjakan.edit');
+    Route::post('/tambahjurusan', [HomeController::class, 'tambahjurusan'])->name('tambah.jurusan');
 
     Route::get('/kerjakan/{id}/edit?page={page}', [HomeController::class, 'mulai'])
         ->name('kerjakan.edit.page')
