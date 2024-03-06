@@ -22,12 +22,13 @@ return new class extends Migration
             $table->string('jabatan')->nullable();
             $table->string('password');
             $table->string('email')->nullable();
+            $table->unsignedBigInteger('kelas_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('role')->default('siswa');
-
-
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign("kelas_id")->on("kelas")->references("id");
         });
     }
 

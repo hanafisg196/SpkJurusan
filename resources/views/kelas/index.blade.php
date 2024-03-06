@@ -4,7 +4,7 @@
 <!-- Contextual classes table starts -->
     <div class="card">
         <div class="card-header">
-            <h5>Tabel Batch Soal</h5>
+            <h5>Tabel Kelas</h5>
             <div class="card-header-right">
                 <ul class="list-unstyled card-option">
                     <li><i class="fa fa-chevron-left"></i></li>
@@ -24,46 +24,42 @@
         </div>
         @endif
 
-        {{-- <div class="text-right mr-4">
+        <div class="text-right mr-4">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                 <i class="ti-plus"></i>Tambah
             </button>
-
-        </div> --}}
+            {{-- <a href="/kegiatan/create" class="btn waves-effect waves-light btn-primary"><i class="ti-plus"></i>Tambah</a> --}}
+        </div>
         <div class="card-block table-border-style">
             <div class="table-responsive">
                 <table class="table">
-                    <caption>Data Siswa</caption>
+                    <caption>Data Kelas</caption>
                     <thead>
                         <tr>
-                            <th>Titile</th>
-                            <th>Kode</th>
+                            <th style="width: 10%">No</th>
+                            <th style="width: 70%">Kelas</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
 
-                    <!-- Kemudian bagian HTML templatenya -->
-                    <style>
-                        .custom-td {
-                            white-space: pre-wrap;
-                        }
                     </style>
+                    @php $no = 1; @endphp
                     <tbody>
                         @foreach ($data as $datas)
                         <tr>
-                            <td>{{ $datas['title'] }}</td>
-                            <td>{{ $datas['kode'] }}</td>
+                            <th scope="row">{{ $no++}}</th>
+                            <td>{{ $datas->kelas }}</td>
                             <td>
                                 <button type="button" class="btn btn-primary exampleModaledit"
-                                data-toggle="modal" data-target="#exampleModaledit{{ $datas->id }}">
+                                 data-toggle="modal" data-target="#exampleModaledit{{ $datas->id }}">
                                     <i class="ti-pencil"></i>
                                 </button>
-                                {{-- <form action="/batch/{{ $datas->id }}" method="POST" class="d-inline">
+                                <form action="/kelas/{{ $datas->id }}" method="POST" class="d-inline">
                                     @method('delete')
                                     @csrf
                                     <button class="ti-trash btn btn-danger"
                                     onclick="return confirm('Yakin Menghapus Data?')"></button>
-                                </form> --}}
+                                </form>
                             </td>
                         </tr>
                         @endforeach
@@ -81,39 +77,23 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Soal</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Data</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="/batch" enctype="multipart/form-data">
+                <form method="POST" action="/kelas" enctype="multipart/form-data">
                     @csrf
                     <div class="card-block">
 
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Title</label>
+                            <label class="col-sm-3 col-form-label">Kelas</label>
                             <div class="col-sm-9">
-                                <input type="text" id="title" name="title"
-                                class="form-control @error('title') is-invalid @enderror"
-                                value="{{ old('title') }}" required>
+                                <input type="text" id="kelas" name="kelas" class="form-control @error('kelas') is-invalid @enderror"
+                                value="{{ old('kelas') }}" required>
 
-                                @error('title')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Kode</label>
-                            <div class="col-sm-9">
-                                <input type="text" id="kode" name="kode"
-                                class="form-control @error('kode') is-invalid @enderror"
-                                value="{{ old('kode') }}" required>
-                                @error('kode')
+                                @error('kelas')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -135,43 +115,28 @@
 <!-- Modal Tambah Data ends -->
 
 {{-- Modal Edit Data --}}
+
 @foreach ($data as $datas)
     <div class="modal fade" id="exampleModaledit{{ $datas->id }}"
         tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Soal</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Kelas</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="{{ url('/batch', $datas->id) }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ url('/editkelas', $datas->id) }}" enctype="multipart/form-data">
                         @csrf
                         <div class="card-block">
                             <div class="form-group row">
-                                <label for="title" class="col-sm-3 col-form-label">Title</label>
+                                <label for="kelas" class="col-sm-3 col-form-label">Kelas</label>
                                 <div class="col-sm-9">
-                                    <input type="text" id="title" name="title"
-                                    class="form-control @error('title') is-invalid @enderror"
-                                    value="{{ $datas->title }}" required>
-                                    @error('title')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                            </div>
-
-
-                            <div class="form-group row">
-                                <label for="kode" class="col-sm-3 col-form-label">Kode</label>
-                                <div class="col-sm-9">
-                                    <input type="text" id="kode" name="kode"
-                                     class="form-control @error('kode') is-invalid @enderror"
-                                     value="{{ $datas->kode }}" required>
-                                    @error('kode')
+                                    <input type="text" id="kelas" name="kelas" class="form-control
+                                     @error('kelas') is-invalid @enderror" value="{{ $datas->kelas }}" required>
+                                    @error('kelas')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
@@ -192,31 +157,5 @@
 
 {{-- Modal Edit Data End--}}
 
-  <script>
-    document.addEventListener('trix-file-accept', function(e){
-        e.preventDefault();
-    });
-
-    $(document).ready(function() {
-        $('.custom-td').each(function() {
-            var text = $(this).text();
-            var words = text.split(' ');
-            var result = '';
-            var count = 0;
-
-            for (var i = 0; i < words.length; i++) {
-                result += words[i] + ' ';
-                count++;
-
-                if (count >= 5) {
-                    result += '\n';
-                    count = 0;
-                }
-            }
-
-            $(this).text(result.trim());
-        });
-    });
-</script>
 
 @endsection

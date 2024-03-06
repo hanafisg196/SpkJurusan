@@ -1,8 +1,4 @@
-@extends('tampilan.main')
-@section('content')
-
-<div class="col-lg-12">
-<!-- Contextual classes table starts -->
+<div>
     <div class="card">
         <div class="card-header">
             <h5>Tabel Data Soal</h5>
@@ -21,7 +17,7 @@
                     <h2>{{ $data->kode .' '. $data->soal }}</h2>
                         {{-- <a href="{{ route('subsoal.create', ['id' => $datas->id]) }}" class="btn btn-primary mb-3 ">Tambah Data</a> --}}
                             <div class="text-right mr-4">
-                                <button type="button" class="btn btn-primary m-2" data-toggle="modal" data-target="#exampleModaltambah{{ $data->id }}">
+                                <button type="button" class="btn btn-primary exampleModaledit m-2" data-toggle="modal" data-target="#exampleModaltambah{{ $data->id }}">
                                     <i class="ti-plus"></i>Tambah Jawaban
                                 </button>
                             </div>
@@ -48,11 +44,9 @@
                 @endforeach
         </div>
     </div>
-</div>
-
-{{-- Modal Edit Data --}}
-@foreach ($datas as $data)
-    <div class="modal fade" id="exampleModaltambah{{ $data->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    {{-- Modal Tambah Data --}}
+    @foreach ($datas as $data)
+    <div wire:ignore.self class="modal fade" id="exampleModaltambah{{ $data->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -62,16 +56,17 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="{{ url('/tambahjawaban', $data->id) }}" enctype="multipart/form-data">
+                    <form wire:submit.prevent="tambahJawaban">
                         @csrf
                         <div class="card-block">
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Jawaban</label>
                                 <div class="col-md-9">
-                                    <select class="form-control" name="nilaicf_id" >
+                                    <select class="form-control" wire:model="nilaicf_id" >
                                         @foreach ($nilaicf as $items )
-                                        <option value="{{ $items->id }}">{{ $items->term }}</option>
-                                    @endforeach
+                                            <option value="{{ $items->id }}">{{ $items->term }}</option>
+                                        @endforeach
+                                        @error('nilaicf_id') <span class="error">{{ $message }}</span> @enderror
                                     </select>
                                 </div>
                             </div>
@@ -85,8 +80,7 @@
             </div>
         </div>
     </div>
-@endforeach
+    @endforeach
 
-{{-- Modal Edit Data End--}}
-
-@endsection
+    {{-- Modal Tambah Data End--}}
+</div>

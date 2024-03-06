@@ -2,11 +2,12 @@
 
 namespace App\Livewire;
 
+use App\Models\Jurusan;
 use App\Models\Soal;
 use App\Models\Ujian;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
-
+use Illuminate\Http\Request;
 class Quiz extends Component
 {
 
@@ -38,7 +39,7 @@ class Quiz extends Component
         $this->answerCounter();
 
         $this->buttonDoneVisibility();
-   
+
 
         return view('livewire.quiz');
     }
@@ -132,25 +133,33 @@ class Quiz extends Component
     public function answerCounter()
     {
         $this->count = Ujian::where('user_id', auth()->user()->id)->count();
-  
+
     }
     public function buttonDoneVisibility()
     {
         $this->count;
 
-        if($this->count == 16)
+        if($this->count == 1)
         {
          $this->doneButtonVisibility = false;
         }
 
     }
-    public function doneExam()
+    public function doneExam(Request $request)
     {
-       
+        // $user_id = Auth::id();
+        // $validatedData = $request->validate([
+        //     'jurusan' => 'required',
+        // ]);
+
+        // $validatedData['user_id'] = $user_id;
+
+        // Jurusan::create($validatedData);
+        // $request->session()->flash('success','tambah data berhasil');
         return redirect('/hasilsiswa');
     }
 
-   
+
 
 }
 

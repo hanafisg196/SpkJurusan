@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\NilaiCF;
 use App\Models\Soal;
+use App\Models\NilaiCF;
 use App\Models\SubSoal;
 use App\Models\BatchSoal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SoalController extends Controller
 {
@@ -67,17 +68,11 @@ class SoalController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy($soal_id)
     {
-         // Temukan data kegiatan berdasarkan ID
-         $soal = Soal::find($id);
+        DB::table('sub_soals')->where('soal_id',$soal_id)->delete();
+        DB::table('soals')->where('id',$soal_id)->delete();
 
-         // Jika data soal ditemukan, lakukan penghapusan
-         if ($soal) {
-             $soal->delete();
-             return redirect('/soal')->with('success', 'Data berhasil dihapus.'); // Redirect dengan pesan sukses
-         } else {
-             return redirect('/soal')->with('error', 'Data tidak ditemukan.'); // Redirect dengan pesan error jika data tidak ditemukan
-         }
+        return redirect('/soal')->with('success', 'Data berhasil Di hapus!');
     }
 }

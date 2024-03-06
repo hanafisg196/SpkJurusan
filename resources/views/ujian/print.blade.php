@@ -1,14 +1,43 @@
-@extends('tampilan2.main')
-@section('content')
+<!DOCTYPE html>
+<html lang="en">
 
-<!-- Categories Start -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap/css/bootstrap.min.css">
+
+</head>
+
+<body onload="window.print()">
+    <!-- Categories Start -->
 <div class="container-xxl py-5 category">
     <div class="container">
-        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-            <h6 class="section-title bg-white text-center text-primary px-3">Penentuan Jurusan</h6>
-            <h1 class="mb-5">SMKN 2 Padang Panjang</h1>
+        <div class="text-center">
+            <h5 class="mb-5">Hasil Penentuan Jurusan</h5>
         </div>
 
+        <div class="row g-3">
+            <div class="card-block table-border-style">
+                <div class="table-responsive">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td><b>Nama</b></td>
+                                <td>: {{ auth()->user()->name }}</td>
+                            </tr>
+                            <tr>
+                                <td><b>NIS</b></td>
+                                <td>: {{ auth()->user()->username }}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Kelas</b></td>
+                                <td>: {{ auth()->user()->kelas->kelas }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
         {{-- <div class="row g-3">
             <div class="card-block table-border-style">
                 <div class="table-responsive">
@@ -285,10 +314,8 @@
         $PersenEkstrovert = hitung_ekstrovert($HasilEksrovert) * 100
     @endphp
     {{-- End Perhitungan --}}
-    <div class="text-end mr-4">
-        <a href="/printsiswa" class="btn btn-primary pull-right" target="_blank">Print</a>
-    </div>
-    <div class="row g-3">
+
+        <div class="row g-3">
             <div class="col-lg-6">
                 <div class="card-block table-border-style">
                     <div class="table-responsive">
@@ -663,16 +690,8 @@
             </p>
 
         </div>
-        <div class="text-center">
-            <form method="post" action="{{ route('tambah.jurusan') }}">
-                @csrf
-                <input type="hidden" name="jurusan" value="{{ $jurusan }}">
-                <input type="hidden" name="kepribadian" value="{{ $kepribadian }}">
-                <button type="submit" class="btn btn-primary">Selesai</button>
-            </form>
-        </div>
     </div>
 </div>
+</body>
 
-<!-- Categories Start -->
-@endsection
+</html>

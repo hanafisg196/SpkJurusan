@@ -62,7 +62,7 @@
                                         <button type="button" class="btn btn-primary exampleModaledit" data-toggle="modal" data-target="#exampleModaledit{{ $datas->id }}">
                                             <i class="ti-pencil"></i>
                                         </button>
-                                        <form action="/siswa/{{ $datas->id }}" method="POST" class="d-inline">
+                                        <form action="/pihaksekolah/{{ $datas->id }}" method="POST" class="d-inline">
                                             @method('delete')
                                             @csrf
                                             <button class="ti-trash btn btn-danger" onclick="return confirm('Yakin Menghapus Data?')"></button>

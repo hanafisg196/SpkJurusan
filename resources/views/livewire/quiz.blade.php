@@ -12,19 +12,16 @@
          <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
              <span class="navbar-toggler-icon"></span>
          </button>
-         {{-- <div class="collapse navbar-collapse" id="navbarCollapse">
-             <div class="navbar-nav p-4 p-lg-0" style="margin-left: 30%">
-                 <h5>0/100</h5>
+         <div class="collapse navbar-collapse" id="navbarCollapse">
+             <div class="navbar-nav p-4 p-lg-0" style="margin-left: 35%">
+                 <h2 class="text-center">{{ $count }}/100</h2>
              </div>
-         </div> --}}
-         <p class="text-center">{{ $count }}/100</p>
-         </nav>
+         </div>
+
      </nav>
      <!-- Navbar End -->
 
      <!-- Ujian Start -->
-
-    
 
      <div class="container-xxl py-5 category">
         <div class="container">
@@ -35,13 +32,13 @@
                             <div class="col-lg-12">
                                 @foreach($soals as $soal)
 
-                               
+
                                     @php
                                         $colors = $color->where('soal_id', $soal->id)->first();
                                         $selectedAnswer = $colors ? $colors->selected_answer : null;
                                         $buttonColor = $selectedAnswer ? 'btn-danger' : 'btn-primary';
                                     @endphp
-                            
+
                                     <button wire:click="selectSoal({{ $soal->id }})" class="btn {{ $buttonColor }}">
                                         {{ $soal->id }}
                                     </button>
@@ -53,6 +50,7 @@
                 </div>
             </div>
 
+
             <div class="row g-3">
                 <div class="card" style="border: 0ch">
                     <div class="card-header">
@@ -61,8 +59,9 @@
                                 <div class="row">
                                     <div class="col-lg-8">
                                         @if ($selectedSoal)
-                                        <p class="card-text">{{ $selectedSoal->soal }}</p>
+                                        <p class="card-text">{{ $selectedSoal->id }} . {{ $selectedSoal->soal }}</p>
                                         <div class="col-lg-4">
+
                                             @foreach ($selectedSoal->subsoal as $sub)
                                             <label for="option{{ $sub->id }}">
                                                 <input type="radio" name="radioButton" id="option{{ $sub->id }}"

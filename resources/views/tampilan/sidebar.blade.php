@@ -49,7 +49,7 @@
         <ul class="pcoded-item pcoded-left-item">
             <li class="{{ request()->segment(1)=='soal'? 'active' : '' }}">
                 <a href="/soal">
-                    <span class="pcoded-micon"><i class="ti-bookmark-alt"></i></span>
+                    <span class="pcoded-micon"><i class="ti-file"></i></span>
                     <span class="pcoded-mtext" data-i18n="nav.dash.main">Soal</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
@@ -59,7 +59,7 @@
         <ul class="pcoded-item pcoded-left-item">
             <li class="{{ request()->segment(1)=='subsoal'? 'active' : '' }}">
                 <a href="/subsoal">
-                    <span class="pcoded-micon"><i class="ti-clipboard"></i></span>
+                    <span class="pcoded-micon"><i class="ti-list"></i></span>
                     <span class="pcoded-mtext" data-i18n="nav.dash.main">Sub Soal</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
@@ -75,34 +75,59 @@
                 </a>
             </li>
         </ul>
-
-        @elseif  (auth()->user()->role == 'guru')
-
         <ul class="pcoded-item pcoded-left-item">
-
-            <ul class="pcoded-item pcoded-left-item">
-                <li class="{{ request()->segment(1)=='dashboard'? 'active' : '' }}">
-                    <a href="/dashboard">
-                        <span class="pcoded-micon"><i class="ti-home"></i></span>
-                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
-                        <span class="pcoded-mcaret"></span>
-                    </a>
-                </li>
-            </ul>
-
-            <li class="{{ request()->segment(1)=='hasilujian'? 'active' : '' }}">
-                <a href="/hasilujian">
-                    <span class="pcoded-micon"><i class="ti-list-ol"></i></i></span>
-                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Hasil Ujian</span>
+            <li class="{{ request()->segment(1)=='kelas'? 'active' : '' }}">
+                <a href="/kelas">
+                    <span class="pcoded-micon"><i class="ti-layout-accordion-separated"></i></span>
+                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Kelas</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>
         </ul>
 
-        @endif
+        @elseif(auth()->user()->role == 'guru')
+                <ul class="pcoded-item pcoded-left-item">
+                    <li class="{{ request()->segment(1)=='dashboard'? 'active' : '' }}">
+                        <a href="/dashboard">
+                            <span class="pcoded-micon"><i class="ti-home"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
 
+                    @php
+                        $isFilterKelas = request()->segment(1) == 'filterkelas';
+                        $hasId = is_numeric(request()->segment(2));
+                    @endphp
 
+                    <li class="pcoded-hasmenu {{ in_array(request()->segment(1), ['hasiljurusan','filterkelas']) ? 'active pcoded-trigger' : ''}} "
+                        dropdown-icon="style3" subitem-icon="style7">
+                        <a href="javascript:void(0)">
+                            <span class="pcoded-micon"><i class="ti-write"></i></span>
+                            <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Hasil Ujian</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
 
+                        <ul class="pcoded-submenu">
+
+                            <li class="{{ request()->segment(1)=='hasiljurusan' ? 'active' : '' }}">
+                                <a href="/hasiljurusan">
+                                    <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
+                                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Semua Siswa</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
+                            <li class="{{ $isFilterKelas && $hasId ? 'active' : '' }}" {{ !$hasId ? 'style=display:none;' : '' }}>
+                                <a href="/filterkelas">
+                                    <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
+                                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Filter Siswa</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            @endif
     </div>
 
 </nav>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class PihakSekolahController extends Controller
@@ -38,8 +39,6 @@ class PihakSekolahController extends Controller
 
         User::create($validatedData);
 
-        $request->session()->flush('success','tambah data berhasil');
-
         return redirect('/pihaksekolah');
     }
 
@@ -63,8 +62,13 @@ class PihakSekolahController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $user_id)
     {
-        //
-    }
+
+        DB::table('ujians')->where('user_id',$user_id)->delete();
+        DB::table('jurusans')->where('user_id',$user_id)->delete();
+        DB::table('users')->where('id',$user_id)->delete();
+
+        return redirect('/pihaksekolah')->with('success', 'Data berhasil Di hapus!');
+   }
 }

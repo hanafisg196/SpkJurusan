@@ -39,6 +39,7 @@
                             <th>No</th>
                             <th>Nama Siswa</th>
                             <th>NIS</th>
+                            <th>Kelas</th>
                             <th>Tempat Lahir</th>
                             <th>Tanggal Lahir</th>
                             <th>Jenis Kelamin</th>
@@ -60,6 +61,13 @@
                                     <th scope="row">{{ $no++}}</th>
                                     <td>{{ $datas['name'] }}</td>
                                     <td>{{ $datas['username'] }}</td>
+                                    <td>
+                                        @if ($datas->kelas)
+                                            {{ $datas->kelas->kelas }}
+                                        @else
+                                            {{ 'Kelas belum diisi' }}
+                                        @endif
+                                    </td>
                                     <td>{{ $datas['tempat_lahir'] }}</td>
                                     <td>{{ $datas['tanggal_lahir'] }}</td>
                                     <td>{{ $datas['jenis_kelamin'] }}</td>
@@ -127,6 +135,17 @@
                                     </div>
                                 @enderror
 
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Kelas</label>
+                            <div class="col-md-9">
+                                <select class="form-control" name="kelas_id" >
+                                    @foreach ($kelas as $items )
+                                    <option value="{{ $items->id }}">{{ $items->kelas }}</option>
+                                @endforeach
+                                </select>
                             </div>
                         </div>
 
@@ -244,6 +263,22 @@
                                         </div>
                                     @enderror
 
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Kelas</label>
+                                <div class="col-md-9">
+                                    <select class="form-control" name="kelas_id">
+                                        @foreach ($kelas as $item)
+                                        @if(old('kelas_id', $data->kelas_id) == $item->id)
+                                            <option value="{{ $item->id }}" selected>{{ $item->kelas }}</option>
+                                        @else
+                                            <option value="{{ $item->id }}">{{ $item->kelas }}</option>
+                                        @endif
+
+                                    @endforeach
+                                    </select>
                                 </div>
                             </div>
 

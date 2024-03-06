@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kelas;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class SiswaController extends Controller
@@ -14,7 +16,8 @@ class SiswaController extends Controller
     public function index()
     {
         return view('siswa.index',[
-            "data" => User::latest()->get()
+            "data" => User::latest()->get(),
+            'kelas' => Kelas::all()
         ]);
     }
 
@@ -33,6 +36,7 @@ class SiswaController extends Controller
         $siswa->tanggal_lahir = $request->tanggal_lahir;
         $siswa->jenis_kelamin = $request->jenis_kelamin;
         $siswa->role = $request->role;
+        $siswa->kelas_id = $request->kelas_id;
         $siswa->save();
         return redirect()->back();
     }
@@ -45,6 +49,7 @@ class SiswaController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|max:255',
             'username' => 'required',
+            'kelas_id' => 'required',
             'password' => 'required',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
@@ -61,25 +66,19 @@ class SiswaController extends Controller
 
         User::create($validatedData);
 
-        $request->session()->flash('success','tambah data berhasil');
-
         return redirect('/siswa');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $user_id)
     {
-        // Temukan data kegiatan berdasarkan ID
-        $siswa = User::find($id);
 
-        // Jika data siswa ditemukan, lakukan penghapusan
-        if ($siswa) {
-            $siswa->delete();
-            return redirect('/siswa')->with('success', 'Data berhasil dihapus.'); // Redirect dengan pesan sukses
-        } else {
-            return redirect('/siswa')->with('error', 'Data tidak ditemukan.'); // Redirect dengan pesan error jika data tidak ditemukan
-        }
+        DB::table('ujians')->where('user_id',$user_id)->delete();
+        DB::table('jurusans')->where('user_id',$user_id)->delete();
+        DB::table('users')->where('id',$user_id)->delete();
+
+        return redirect('/siswa')->with('success', 'Data berhasil Di hapus!');
    }
 }

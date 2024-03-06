@@ -44,4 +44,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Ujian::class, "user_id", "id");
     }
+
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class, "kelas_id", "id");
+    }
 }

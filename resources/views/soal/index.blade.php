@@ -98,7 +98,7 @@
                     <div class="card-block">
 
 
-                        <div class="form-group row">
+                        <div hidden class="form-group row">
                             <label class="col-sm-3 col-form-label">Batch</label>
                             <div class="col-md-9">
                                 <select class="form-control" name="batch_id" >
@@ -194,8 +194,8 @@
                         @csrf
                         <div class="card-block">
 
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Nilai CF(Rule)</label>
+                            <div hidden class="form-group row">
+                                <label class="col-sm-3 col-form-label">Batch</label>
                                 <div class="col-md-9">
                                     <select class="form-control" name="batch_id">
                                         @foreach ($batch as $item)
@@ -280,31 +280,6 @@
 
 {{-- Modal Edit Data End--}}
 
-  <script>
-    document.addEventListener('trix-file-accept', function(e){
-        e.preventDefault();
-    });
 
-    $(document).ready(function() {
-        $('.custom-td').each(function() {
-            var text = $(this).text();
-            var words = text.split(' ');
-            var result = '';
-            var count = 0;
-
-            for (var i = 0; i < words.length; i++) {
-                result += words[i] + ' ';
-                count++;
-
-                if (count >= 5) {
-                    result += '\n';
-                    count = 0;
-                }
-            }
-
-            $(this).text(result.trim());
-        });
-    });
-</script>
 
 @endsection
