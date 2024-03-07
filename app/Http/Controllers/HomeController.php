@@ -19,8 +19,9 @@ class HomeController extends Controller
 
    public function home()
    {
+  
     $soal = Soal::with('subsoal')->get();
-     return view('ujian.index')->with('soal', $soal);
+     return view('ujian.index')->with(['soal' => $soal]);
    }
 
    public function hasil()
@@ -32,7 +33,8 @@ class HomeController extends Controller
             ->where('user_id', $userId)
             ->get();
 
-        return view('ujian.hasil')->with('hasil', $hasil);
+        $jrs = Jurusan::where('user_id', $userId)->get();
+        return view('ujian.hasil')->with(['hasil'=> $hasil, 'jrs' => $jrs]);
     }
 
     public function print()
@@ -61,7 +63,7 @@ class HomeController extends Controller
             ['user_id' => $user_id],
             $validatedData
         );
-        return redirect('/ujian');
+        return redirect('/hasilsiswa');
     }
 
    public function list()

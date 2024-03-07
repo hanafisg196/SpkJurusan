@@ -7,6 +7,18 @@
         <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
             <h6 class="section-title bg-white text-center text-primary px-3">Penentuan Jurusan</h6>
             <h1 class="mb-5">SMKN 2 Padang Panjang</h1>
+
+            <div id="textLoad" class="text-center" style="display: none">
+                <h4>Sedang Menyimpan Data..</h4>
+            </div>
+           
+                <div id="loading"
+                style="display:none"
+                class="spinner-border text-primary  position-absolute top-30 start-50">
+                   <p class="sr-only">Loading...</span>
+               </div>
+            
+          
         </div>
 
         {{-- <div class="row g-3">
@@ -661,18 +673,54 @@
             <p>
                 Selamat belajar dan semoga sukses dalam mengejar impian pendidikan dan karir Anda!
             </p>
-
+            
         </div>
+
+        
+
         <div class="text-center">
             <form method="post" action="{{ route('tambah.jurusan') }}">
                 @csrf
                 <input type="hidden" name="jurusan" value="{{ $jurusan }}">
                 <input type="hidden" name="kepribadian" value="{{ $kepribadian }}">
-                <button type="submit" class="btn btn-primary">Selesai</button>
+                <button id="simpanButton" type="submit" class="btn btn-primary" hidden>Selesai</button>
             </form>
         </div>
+
+        
+
+        <div class="text-center" id="jrs" hidden>
+            @foreach ($jrs as $jur)
+                <h1>{{ $jur->jurusan }}</h1>
+            @endforeach
+        </div>
+
+        
+        
     </div>
 </div>
 
 <!-- Categories Start -->
 @endsection
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        let simpanButton = document.getElementById("simpanButton");
+        let jrsElement = document.getElementById("jrs");
+        let textLoadingElement = document.getElementById("textLoad");
+        let loadingElement = document.getElementById("loading");
+
+        let hasData = jrsElement && jrsElement.children.length > 0;
+
+        if (simpanButton && !hasData) {
+            textLoadingElement.style.display = "block";
+            loadingElement.style.display = "block";
+            setTimeout(() => {
+                textLoadingElement.style.display = "none";
+                loadingElement.style.display = "none";
+                simpanButton.click();
+                
+            }, 5000);
+        }
+    });
+</script>
+

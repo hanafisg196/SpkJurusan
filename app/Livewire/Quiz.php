@@ -139,7 +139,7 @@ class Quiz extends Component
     {
         $this->count;
 
-        if($this->count == 1)
+        if($this->count === 4)
         {
          $this->doneButtonVisibility = false;
         }
