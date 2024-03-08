@@ -4,7 +4,7 @@
 <!-- Contextual classes table starts -->
     <div class="card">
         <div class="card-header">
-            <h5>Tabel Data Siswa</h5>
+            <h5>Tabel Data Soal</h5>
             <div class="card-header-right">
                 <ul class="list-unstyled card-option">
                     <li><i class="fa fa-chevron-left"></i></li>
@@ -23,39 +23,39 @@
             </div>
         </div>
         @endif
-
         <div class="text-right mr-4">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                 <i class="ti-plus"></i>Tambah
             </button>
             {{-- <a href="/kegiatan/create" class="btn waves-effect waves-light btn-primary"><i class="ti-plus"></i>Tambah</a> --}}
         </div>
+        <div class="col-md-4 ml-4">
+            <form action="/soal">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search.." name="search" value="{{ request('search') }}">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
         <div class="card-block table-border-style">
             <div class="table-responsive">
                 <table class="table">
-                    <caption>Data Siswa</caption>
+                    <caption>Data Soal</caption>
                     <thead>
                         <tr>
                             <th>Kode</th>
-                            <th>Batch</th>
                             <th>Soal</th>
                             <th>Jenis</th>
                             <th>Nilai CF(Rule)</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
-
-                    <!-- Kemudian bagian HTML templatenya -->
-                    <style>
-                        .custom-td {
-                            white-space: pre-wrap;
-                        }
-                    </style>
                     <tbody>
                         @foreach ($data as $datas)
                         <tr>
                             <td>{{ $datas->kode }}</td>
-                            <td>{{ $datas->batch->kode }}</td>
                             <td>{{ $datas->soal }}</td>
                             <td>{{ $datas->jenis }}</td>
                             <td>{{ $datas->nilaicf->term }}</td>
@@ -74,9 +74,22 @@
                         </tr>
                         @endforeach
                     </tbody>
-
-
                 </table>
+            </div>
+            <div>
+                Showing
+                {{ $data->firstItem() }}
+                to
+                {{ $data->lastItem() }}
+                of
+                {{ $data->total() }}
+                entries
+            </div>
+
+            <div class="pull-right">
+                <div class="mx-auto text-end mb-2 wow fadeInUp" data-wow-delay="0.5s">
+                    {{ $data->links() }}
+                </div>
             </div>
         </div>
     </div>

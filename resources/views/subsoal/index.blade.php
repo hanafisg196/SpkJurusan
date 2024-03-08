@@ -46,6 +46,21 @@
                                 @endforeach
                             </table>
                 @endforeach
+                <div>
+                    Showing
+                    {{ $datas->firstItem() }}
+                    to
+                    {{ $datas->lastItem() }}
+                    of
+                    {{ $datas->total() }}
+                    entries
+                </div>
+
+                <div class="pull-right">
+                    <div class="mx-auto text-end mb-2 wow fadeInUp" data-wow-delay="0.5s">
+                        {{ $datas->links() }}
+                    </div>
+                </div>
         </div>
     </div>
 </div>

@@ -29,6 +29,16 @@
                 <i class="ti-plus"></i>Tambah
             </button>
         </div>
+        <div class="col-md-4 ml-4">
+            <form action="/pihaksekolah">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search.." name="search" value="{{ request('search') }}">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
         <div class="card-block table-border-style">
             <div class="table-responsive">
                 <table class="table">
@@ -51,10 +61,10 @@
                     </style>
                     @php $no = 1; @endphp
                     <tbody>
-                        @foreach ($data as $datas)
+                        @foreach ($data as $key => $datas)
                             @if ($datas['role'] == "guru")
                                 <tr>
-                                    <th scope="row">{{ $no++}}</th>
+                                    <th scope="row">{{ $data->firstItem()+$key}}</th>
                                     <td>{{ $datas['name'] }}</td>
                                     <td>{{ $datas['username'] }}</td>
                                     <td>{{ $datas['jabatan'] }}</td>
@@ -72,9 +82,22 @@
                             @endif
                         @endforeach
                     </tbody>
-
-
                 </table>
+            </div>
+            <div>
+                Showing
+                {{ $data->firstItem() }}
+                to
+                {{ $data->lastItem() }}
+                of
+                {{ $data->total() }}
+                entries
+            </div>
+
+            <div class="pull-right">
+                <div class="mx-auto text-end mb-2 wow fadeInUp" data-wow-delay="0.5s">
+                    {{ $data->links() }}
+                </div>
             </div>
         </div>
     </div>

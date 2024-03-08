@@ -14,15 +14,21 @@ class SoalController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
 
         $batch = BatchSoal::all();
         $nilaicf = NilaiCF::all();
-        $data = Soal::all();
+        $cari = Soal::latest();
+
+        if (request('search')) {
+            $cari->where('soal','LIKE','%'.$request->search.'%')
+            ->orWhere('kode','LIKE','%'.$request->search.'%')
+            ->orWhere('jenis','LIKE','%'.$request->search.'%');
+        }
 
         return view('soal.index')->with([
-            'data'=> $data,
+            'data' => $cari->paginate(10),
             'batch'=> $batch,
             'nilaicf'=> $nilaicf
         ]);

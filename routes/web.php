@@ -65,6 +65,7 @@ Route::group(['middleware' => ['auth', 'checkrole:guru']], function () {
 
     Route::resource('/hasiljurusan', HasilController::class);
     Route::get('/filterkelas/{id}',[HasilController::class, 'filter']);
+    Route::get('/filtersiswa/{id}',[SiswaController::class, 'filter']);
     Route::get('/print',[HasilController::class, 'print']);
     Route::get('/printfilter/{id}',[HasilController::class, 'printfilter']);
 

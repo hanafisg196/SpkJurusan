@@ -13,13 +13,32 @@ class SiswaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $cari = User::latest()->where('role','siswa');
+
+        if (request('search')) {
+            $cari->where('name','LIKE','%'.$request->search.'%')
+            ->orWhere('username','LIKE','%'.$request->search.'%');
+        }
+
         return view('siswa.index',[
-            "data" => User::latest()->get(),
+            'data' => $cari->paginate(10),
             'kelas' => Kelas::all()
         ]);
     }
+
+    public function filter($id)
+    {
+        $data = User::with('kelas')->where('kelas_id', $id)->paginate(10);
+
+
+        return view('siswa.filter', [
+            'data' => $data,
+            'kelas' => Kelas::all(),
+        ]);
+    }
+
 
     /**
      * Show the form for creating a new resource.

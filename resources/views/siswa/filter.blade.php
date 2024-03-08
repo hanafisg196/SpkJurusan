@@ -80,10 +80,10 @@
                     </style>
                     @php $no = 1; @endphp
                     <tbody>
-                        @foreach ($data as $key => $datas)
+                        @foreach ($data as $datas)
                             @if ($datas['role'] == "siswa")
                                 <tr>
-                                    <th scope="row">{{ $data->firstItem()+$key}}</th>
+                                    <th scope="row">{{ $no++}}</th>
                                     <td>{{ $datas['name'] }}</td>
                                     <td>{{ $datas['username'] }}</td>
                                     <td>
@@ -110,22 +110,9 @@
                             @endif
                         @endforeach
                     </tbody>
-                </table>
-            </div>
-            <div>
-                Showing
-                {{ $data->firstItem() }}
-                to
-                {{ $data->lastItem() }}
-                of
-                {{ $data->total() }}
-                entries
-            </div>
 
-            <div class="pull-right">
-                <div class="mx-auto text-end mb-2 wow fadeInUp" data-wow-delay="0.5s">
-                    {{ $data->links() }}
-                </div>
+
+                </table>
             </div>
         </div>
     </div>
@@ -394,31 +381,5 @@
 
 {{-- Modal Edit Data End--}}
 
-  <script>
-    document.addEventListener('trix-file-accept', function(e){
-        e.preventDefault();
-    });
-
-    $(document).ready(function() {
-        $('.custom-td').each(function() {
-            var text = $(this).text();
-            var words = text.split(' ');
-            var result = '';
-            var count = 0;
-
-            for (var i = 0; i < words.length; i++) {
-                result += words[i] + ' ';
-                count++;
-
-                if (count >= 5) {
-                    result += '\n';
-                    count = 0;
-                }
-            }
-
-            $(this).text(result.trim());
-        });
-    });
-</script>
 
 @endsection

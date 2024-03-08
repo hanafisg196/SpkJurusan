@@ -14,7 +14,7 @@ class SubSoalController extends Controller
      */
     public function index()
     {
-        $datas = Soal::with('subsoal')->latest()->get();
+        $datas = Soal::with('subsoal')->latest()->paginate(10);
         $nilaicf = NilaiCF::all();
 
         return view('subsoal.index', compact('datas','nilaicf'));
